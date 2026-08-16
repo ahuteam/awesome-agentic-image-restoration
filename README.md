@@ -1,6 +1,6 @@
 # Agentic Image Restoration
 
-Supporting materials for **Agentic Image Restoration: A Structured Review**.
+Our team built this project for the paper **Agentic Image Restoration: A Structured Review**.
 
 This companion resource organizes the Agentic Image Restoration literature through a controller-centered taxonomy and provides source-linked papers, public implementations, benchmark resources, and evaluation guidance.
 
