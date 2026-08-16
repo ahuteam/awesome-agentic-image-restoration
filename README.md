@@ -6,10 +6,35 @@ This repository accompanies the review **Agentic Image Restoration: A Structured
 
 > Last verified: 16 August 2026. A dash in the **Code / project** column means that no author-linked public implementation was verified at the time of the audit. Retracted or withdrawn papers are not included.
 
+![Conventional restoration, prompt-conditioned restoration, and closed-loop restoration agents](assets/figures/paradigm_comparison.png)
+
+## At a glance
+
+| Coverage | Current release |
+|---|---|
+| Time span | 2018–2026 |
+| Curated papers and benchmark resources | 45 |
+| Verified public code repositories | 23 |
+| Verified author project pages | 3 |
+| Controller categories | 5 |
+| Application scope | Natural images, photography, driving, medical imaging, remote sensing, cultural heritage, and scientific microscopy |
+
+### What this repository adds
+
+- A controller-centred P1–P5 taxonomy that separates policy learning, conditional routing, tool-using MLLM agents, memory-augmented agents, and multi-agent systems.
+- Direct links to stable paper records and author-linked code or project pages.
+- A source-traceable quantitative review that keeps results within their original benchmark protocols.
+- An explicit distinction between image-quality evaluation and agent-level evaluation, including tool calls, retries, latency, memory, cost, and failure recovery.
+- A maintained withdrawal policy. Records with a confirmed retraction or withdrawal signal are removed rather than retained as a separate category.
+
 ## Contents
 
 - [Review paper](#review-paper)
+- [At a glance](#at-a-glance)
+- [Visual overview](#visual-overview)
 - [Taxonomy](#taxonomy)
+- [Benchmarks and evaluation](#benchmarks-and-evaluation)
+- [Open-source starting points](#open-source-starting-points)
 - [P1: Cybernetic and reinforcement-learning agents](#p1-cybernetic-and-reinforcement-learning-agents)
 - [P2: Prompt-conditioned restoration](#p2-prompt-conditioned-restoration)
 - [P3: MLLM reasoning and tool use](#p3-mllm-reasoning-and-tool-use)
@@ -25,6 +50,37 @@ This repository accompanies the review **Agentic Image Restoration: A Structured
 - [Overleaf-ready source package](paper/Agentic_image_restoration_Overleaf.zip)
 - [Reference-verification summary](paper/reference_verification_report.md)
 
+**Authors:** Yuezhe Yang, Chengru Li, Zhuodong Chai, Xingbo Dong, and Zhe Jin. Xingbo Dong is the corresponding author.
+
+### Repository layout
+
+```text
+.
+├── assets/figures/                         # GitHub-ready overview figures
+├── paper/agentic_image_restoration.pdf    # Compiled review
+├── paper/Agentic_image_restoration_Overleaf.zip
+├── paper/reference_verification_report.md
+└── README.md                               # Curated paper and code index
+```
+
+## Visual overview
+
+### From restoration mapping to restoration agent
+
+Conventional restoration applies a fixed mapping. Prompt-conditioned systems expose task control but generally remain open loop. Restoration agents add perception, scheduling, execution, verification, and conditional replanning.
+
+### Four-component AIR anatomy
+
+The review describes an AIR system through four interacting components: perception, decision, tool execution, and reflection or memory. This anatomy is orthogonal to the P1–P5 controller taxonomy and can be used to compare systems within the same category.
+
+![Four-component anatomy of agentic image restoration](assets/figures/air_anatomy.png)
+
+### Development timeline
+
+The literature develops through overlapping controller paradigms rather than a single linear succession. Deep-RL tool selection and prompt routing remain relevant while MLLM tool use, memory-guided search, and multi-agent collaboration expand the action and feedback spaces.
+
+![Development timeline of agentic image restoration](assets/figures/development_timeline.png)
+
 ## Taxonomy
 
 | Class | Controller pattern | Typical capability |
@@ -34,6 +90,63 @@ This repository accompanies the review **Agentic Image Restoration: A Structured
 | P3 | MLLM reasoning and tool use | Diagnoses degradation and orchestrates external tools |
 | P4 | Memory-augmented agent | Reuses episodic, causal, or distilled experience |
 | P5 | Multi-agent system | Coordinates specialist agents or fast/slow roles |
+
+### Classification guide
+
+| Question | Interpretation |
+|---|---|
+| Does the system choose an action, route, path, or parameter from feedback? | P1 candidate |
+| Does a prompt or learned condition modulate a fixed restoration network without an external action loop? | P2 candidate |
+| Does an MLLM diagnose degradation and call external restoration tools? | P3 candidate |
+| Does the controller retrieve, update, or reuse persistent restoration experience? | P4 candidate |
+| Are multiple specialist or fast/slow agents coordinated explicitly? | P5 candidate |
+
+Hybrid and boundary systems are labelled by their dominant controller. A generative restorer is not considered agentic solely because it accepts text. The decisive evidence is runtime control over actions, feedback, stopping, replanning, memory, or collaboration.
+
+## Benchmarks and evaluation
+
+### Dataset and protocol families
+
+| Family | Representative resources | Main evaluation target |
+|---|---|---|
+| Mixed natural-image degradation | MiO100-derived protocols, CDD-11 | Degradation diagnosis, restoration order, tool coordination, and rollback |
+| Denoising, deraining, dehazing, deblurring, and low light | BSD68, SIDD, Rain100L/H, SOTS, GoPro, RealBlur, LOL | Fidelity and perceptual restoration quality |
+| High-resolution restoration | DIV2K and 4K derivatives | Recursive super-resolution and region-aware execution |
+| Medical imaging | fastMRI-related protocols and AAPM low-dose CT | Sampling, reconstruction, parameter control, and physics-aware correction |
+| Downstream perception | nuScenes and HRSC-Robust | Detection or perception utility after restoration |
+| Scientific and cultural imaging | Microscopy, inscriptions, murals, and remote-sensing imagery | Domain validity, semantic preservation, and expert-guided recovery |
+
+### Minimum reporting checklist
+
+| Dimension | Recommended reporting |
+|---|---|
+| Output fidelity | PSNR and SSIM with dataset, split, degradation, and clean-reference availability |
+| Perceptual quality | LPIPS, DISTS, or NR-IQA with metric direction and implementation |
+| Downstream utility | Fixed downstream model, degraded-input baseline, mAP, mIoU, or task-specific error |
+| Agent execution | Tool registry, calls, planning steps, retries, stop rule, and failure rate |
+| Efficiency | End-to-end latency, hardware, VRAM, tokens or API cost, and concurrency |
+| Robustness and safety | Worsening rate, hallucination or provenance failures, rollback behaviour, and audit trail |
+
+Quantitative values should only be compared directly when inputs, degradation generation, available tools, feedback functions, and execution budgets are aligned. The review therefore reports source-traceable examples within their native protocols instead of constructing an artificial cross-paper leaderboard.
+
+## Open-source starting points
+
+For readers who want to reproduce the main controller patterns quickly:
+
+| Pattern | Recommended project |
+|---|---|
+| Sequential tool selection | [RL-Restore](https://github.com/yuke93/RL-Restore) |
+| Pixel-level reinforcement learning | [PixelRL](https://github.com/rfuruta/pixelRL) |
+| Dynamic network-path selection | [Path-Restore](https://github.com/yuke93/Path-Restore) |
+| Prompt-conditioned restoration | [PromptIR](https://github.com/va1shn9v/PromptIR) and [InstructIR](https://github.com/mv-lab/InstructIR) |
+| MLLM tool orchestration | [AgenticIR](https://github.com/Kaiwen-Zhu/AgenticIR) |
+| Iterative restore–assess loop | [RAR](https://github.com/saic-fi/RAR) |
+| Joint plan and execution optimization | [OPERA](https://github.com/xsyshuishui/Opera) |
+| Frequency-aware planning | [FAPE-IR](https://github.com/Programmergg/FAPE-IR) |
+| Driving-oriented restoration | [JarvisIR](https://github.com/LYL1015/JarvisIR) |
+| 4K super-resolution agent | [4KAgent](https://github.com/taco-group/4KAgent) |
+| Medical reconstruction and sampling | [DUAL](https://github.com/yanweipang/mri) and [KSRO](https://github.com/Ruru-Xu/KSRO) |
+| Domain-specific restoration agents | [RIR-Agent](https://github.com/Arispur-311/RIR-Agent), [EpiAgent](https://github.com/blackprotoss/EpiAgent), and [MAPGR](https://github.com/tiskun101-oss/MAPGR) |
 
 ## P1: Cybernetic and reinforcement-learning agents
 
