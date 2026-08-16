@@ -8,6 +8,8 @@ This companion resource organizes the Agentic Image Restoration literature throu
   <img src="assets/figures/paradigm_comparison.png" alt="Comparison of conventional restoration, prompt-conditioned restoration, and restoration agents" width="900">
 </p>
 
+<p align="center"><sub><strong>Figure 1.</strong> Conventional models use a fixed input-to-output mapping, prompt-conditioned models add task instructions, and restoration agents operate through a closed perceive-plan-execute-verify loop.</sub></p>
+
 ## Contents
 
 - [Abstract](#abstract)
@@ -15,7 +17,9 @@ This companion resource organizes the Agentic Image Restoration literature throu
 - [Taxonomy](#taxonomy)
 - [Visual overview](#visual-overview)
 - [Benchmarks and evaluation](#benchmarks-and-evaluation)
+- [Evidence tables](EVIDENCE_TABLES.md)
 - [Paper and code index](#paper-and-code-index)
+- [Supporting references](#supporting-references)
 - [Citation](#citation)
 
 ## Abstract
@@ -49,7 +53,7 @@ The categories follow the dominant runtime controller. Hybrid and boundary syste
   <img src="assets/figures/air_anatomy.png" alt="Four-component anatomy of Agentic Image Restoration" width="900">
 </p>
 
-AIR systems can be described through four interacting components: perception, decision, action, and reflection or memory. This functional anatomy complements the P1-P5 controller taxonomy.
+<p align="center"><sub><strong>Figure 2.</strong> Four-component anatomy of AIR. Perception translates a degraded input into an actionable observation, the decision brain selects from a heterogeneous tool space, reflection determines whether to stop, retry, or roll back, and memory records useful experience.</sub></p>
 
 ### Development timeline
 
@@ -57,7 +61,7 @@ AIR systems can be described through four interacting components: perception, de
   <img src="assets/figures/development_timeline.png" alt="Development timeline of Agentic Image Restoration" width="900">
 </p>
 
-The controller families overlap in time. Reinforcement learning and prompt conditioning remain active while tool-using MLLMs, memory-guided search, and multi-agent coordination expand the decision space.
+<p align="center"><sub><strong>Figure 3.</strong> Representative AIR developments from 2018 to 2026 across cybernetic reinforcement learning, prompt-conditioned routing, MLLM tool orchestration, memory-augmented search, and multi-agent collaboration.</sub></p>
 
 ## Benchmarks and evaluation
 
@@ -70,6 +74,8 @@ The controller families overlap in time. Reinforcement learning and prompt condi
 | Efficiency | End-to-end latency, hardware, memory, model or API version, and execution budget |
 
 Results should be compared directly only when the input construction, degradation protocol, available tools, feedback function, and execution budget are aligned.
+
+The complete source-aligned tables from the review are provided in **[Evidence Tables](EVIDENCE_TABLES.md)**. They include the architectural taxonomy, controller comparisons, benchmark datasets, all reported quantitative values, minimum metric families, and reproducibility requirements.
 
 ## Paper and code index
 
@@ -99,8 +105,14 @@ Titles reproduce the linked publication records. The year column gives the year 
 | PromptIR: Prompting for All-in-One Image Restoration | NeurIPS | 2023 | [Paper](https://proceedings.neurips.cc/paper_files/paper/2023/hash/e187897ed7780a8c3f50a8fc8997e6b1-Abstract-Conference.html) | [Code](https://github.com/va1shn9v/PromptIR) |
 | InstructIR: High-Quality Image Restoration Following Human Instructions | ECCV | 2024 | [Paper](https://arxiv.org/abs/2401.16468) | [Code](https://github.com/mv-lab/InstructIR) |
 | Controlling Vision-Language Models for Multi-Task Image Restoration | ICLR | 2024 | [Paper](https://openreview.net/forum?id=HBA5UGjv7r) | [Code](https://github.com/Algolzw/daclip-uir) |
+| Multimodal Prompt Perceiver: Empower Adaptiveness, Generalizability and Fidelity for All-in-One Image Restoration | CVPR | 2024 | [Paper](https://openaccess.thecvf.com/content/CVPR2024/html/Ai_Multimodal_Prompt_Perceiver_Empower_Adaptiveness_Generalizability_and_Fidelity_for_All-in-One_CVPR_2024_paper.html) | [Code](https://github.com/hhb072/MPerceiver-Code) |
 | AutoDIR: Automatic All-in-One Image Restoration with Latent Diffusion | ECCV | 2024 | [Paper](https://arxiv.org/abs/2310.10123) | [Code](https://github.com/jiangyitong/AutoDIR) |
 | OneRestore: A Universal Restoration Framework for Composite Degradation | ECCV | 2024 | [Paper](https://arxiv.org/abs/2407.04621) | [Code](https://github.com/gy65896/OneRestore) |
+| Language-Driven All-in-One Adverse Weather Removal | CVPR | 2024 | [Paper](https://openaccess.thecvf.com/content/CVPR2024/html/Yang_Language-driven_All-in-one_Adverse_Weather_Removal_CVPR_2024_paper.html) | [Code](https://github.com/noxsine/LDR) |
+| SPIRE: Semantic Prompt-Driven Image Restoration | ECCV | 2024 | [Paper](https://arxiv.org/abs/2312.11595) | [Project](https://chenyangqiqi.github.io/tip/) |
+| Scaling Up to Excellence: Practicing Model Scaling for Photo-Realistic Image Restoration In the Wild | CVPR | 2024 | [Paper](https://openaccess.thecvf.com/content/CVPR2024/html/Yu_Scaling_Up_to_Excellence_Practicing_Model_Scaling_for_Photo-Realistic_Image_CVPR_2024_paper.html) | [Code](https://github.com/Fanghua-Yu/SUPIR) |
+| DreamClear: High-Capacity Real-World Image Restoration with Privacy-Safe Dataset Curation | NeurIPS | 2024 | [Paper](https://proceedings.neurips.cc/paper_files/paper/2024/hash/6452474601429509f3035dc81c233226-Abstract-Conference.html) | [Code](https://github.com/shallowdream204/DreamClear) |
+| UniRes: Universal Image Restoration for Complex Degradations | ICCV | 2025 | [Paper](https://openaccess.thecvf.com/content/ICCV2025/html/Zhou_UniRes_Universal_Image_Restoration_for_Complex_Degradations_ICCV_2025_paper.html) | — |
 
 ### P3: MLLM reasoning and tool use
 
@@ -149,6 +161,65 @@ Titles reproduce the linked publication records. The year column gives the year 
 | PhotoAgent: Exploratory Visual Aesthetic Planning with Large Vision Models | arXiv | 2026 | [Paper](https://arxiv.org/abs/2602.22809) | [Code](https://github.com/mdyao/PhotoAgent) |
 | PhotoArtAgent: Intelligent Photo Retouching with Language Model-Based Artist Agents | arXiv | 2025 | [Paper](https://arxiv.org/abs/2505.23130) | — |
 | RetouchIQ: MLLM Agents for Instruction-Based Image Retouching with Generalist Reward | CVPR | 2026 | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Wu_RetouchIQ_MLLM_Agents_for_Instruction-Based_Image_Retouching_with_Generalist_Reward_CVPR_2026_paper.html) | — |
+
+## Supporting references
+
+The following sources are discussed in the review as restoration foundations, adjacent imaging methods, benchmark definitions, evaluation metrics, or provenance standards. They are separated from the P1-P5 controller index so that the taxonomy remains readable.
+
+### Restoration and multimodal foundations
+
+| Work | Venue | Year | Paper | Code / project |
+|---|---|---:|---|---|
+| Nonlinear Total Variation Based Noise Removal Algorithms | Physica D | 1992 | [Paper](https://doi.org/10.1016/0167-2789(92)90242-F) | — |
+| Image Denoising by Sparse 3-D Transform-Domain Collaborative Filtering | IEEE TIP | 2007 | [Paper](https://doi.org/10.1109/TIP.2007.901238) | — |
+| Learning a Deep Convolutional Network for Image Super-Resolution | ECCV | 2014 | [Paper](https://doi.org/10.1007/978-3-319-10593-2_13) | — |
+| Beyond a Gaussian Denoiser: Residual Learning of Deep CNN for Image Denoising | IEEE TIP | 2017 | [Paper](https://doi.org/10.1109/TIP.2017.2662206) | [Code](https://github.com/cszn/DnCNN) |
+| SwinIR: Image Restoration Using Swin Transformer | ICCV Workshops | 2021 | [Paper](https://doi.org/10.1109/ICCVW54120.2021.00210) | [Code](https://github.com/JingyunLiang/SwinIR) |
+| Learning Transferable Visual Models From Natural Language Supervision | ICML | 2021 | [Paper](https://proceedings.mlr.press/v139/radford21a.html) | [Code](https://github.com/openai/CLIP) |
+| Restormer: Efficient Transformer for High-Resolution Image Restoration | CVPR | 2022 | [Paper](https://doi.org/10.1109/CVPR52688.2022.00564) | [Code](https://github.com/swz30/Restormer) |
+| Simple Baselines for Image Restoration | ECCV | 2022 | [Paper](https://doi.org/10.1007/978-3-031-20071-7_2) | [Code](https://github.com/megvii-research/NAFNet) |
+| Towards Robust Blind Face Restoration with Codebook Lookup Transformer | NeurIPS | 2022 | [Paper](https://proceedings.neurips.cc/paper_files/paper/2022/hash/c573258c38d0a3919d8c1364053c45df-Abstract-Conference.html) | [Code](https://github.com/sczhou/CodeFormer) |
+| Exploiting Diffusion Prior for Real-World Image Super-Resolution | IJCV | 2024 | [Paper](https://doi.org/10.1007/s11263-024-02168-7) | [Code](https://github.com/IceClear/StableSR) |
+
+### Imaging restoration examples discussed in the review
+
+| Work | Venue | Year | Paper | Code / project |
+|---|---|---:|---|---|
+| Abandoning the Bayer-Filter To See in the Dark | CVPR | 2022 | [Paper](https://openaccess.thecvf.com/content/CVPR2022/html/Dong_Abandoning_the_Bayer-Filter_To_See_in_the_Dark_CVPR_2022_paper.html) | — |
+| RawFormer: An Efficient Vision Transformer for Low-Light RAW Image Enhancement | IEEE SPL | 2022 | [Paper](https://doi.org/10.1109/LSP.2022.3233005) | — |
+| $L^2$DM: A Diffusion Model for Low-Light Image Enhancement | PRCV | 2023 | [Paper](https://doi.org/10.1007/978-981-99-8552-4_11) | — |
+| Low-Light Image Enhancement with Luminance Duality | Knowledge-Based Systems | 2025 | [Paper](https://doi.org/10.1016/j.knosys.2025.114420) | — |
+| Lightweight Omnidirectional Super-Resolution via Frequency-Spatial Fusion and Equirectangular Projection Correction | Journal of Electronic Imaging | 2025 | [Paper](https://doi.org/10.1117/1.JEI.34.2.023008) | — |
+| RawRWKV: An Efficient Raw Image Enhancement Framework via RWKV Architecture | Signal, Image and Video Processing | 2025 | [Paper](https://doi.org/10.1007/s11760-025-04940-9) | — |
+| EvRWKV: A Continuous Interactive RWKV Framework for Effective Event-Guided Low-Light Image Enhancement | IEEE TCSVT | 2026 | [Paper](https://doi.org/10.1109/TCSVT.2026.3672491) | — |
+| PriP: A Training-Free Low-Light Image Enhancement Framework via Content and Illumination Synergistic Guidance | Computers & Graphics | 2026 | [Paper](https://doi.org/10.1016/j.cag.2026.104676) | — |
+
+### Dataset and benchmark sources
+
+| Work | Venue | Year | Paper | Dataset / project |
+|---|---|---:|---|---|
+| Learning Photographic Global Tonal Adjustment with a Database of Input/Output Image Pairs | CVPR | 2011 | [Paper](https://doi.org/10.1109/CVPR.2011.5995413) | [MIT-Adobe FiveK](https://people.csail.mit.edu/vladb/photoadjust/) |
+| NTIRE 2017 Challenge on Single Image Super-Resolution: Dataset and Study | CVPR Workshops | 2017 | [Paper](https://doi.org/10.1109/CVPRW.2017.150) | [DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/) |
+| Deep Multi-Scale Convolutional Neural Network for Dynamic Scene Deblurring | CVPR | 2017 | [Paper](https://doi.org/10.1109/CVPR.2017.35) | [GoPro](https://github.com/SeungjunNah/DeepDeblur_release) |
+| A High-Quality Denoising Dataset for Smartphone Cameras | CVPR | 2018 | [Paper](https://openaccess.thecvf.com/content_cvpr_2018/html/Abdelhamed_A_High-Quality_Denoising_CVPR_2018_paper.html) | [SIDD](https://abdokamel.github.io/sidd/) |
+| Deep Retinex Decomposition for Low-Light Enhancement | BMVC | 2018 | [Paper](https://bmva-archive.org.uk/bmvc/2018/contents/papers/0451.pdf) | [LOL / RetinexNet](https://github.com/weichen582/RetinexNet) |
+| Low Dose CT Image and Projection Data | The Cancer Imaging Archive | 2020 | [Record](https://doi.org/10.7937/9NPB-2637) | [Dataset](https://www.cancerimagingarchive.net/collection/ldct-and-projection-data/) |
+| fastMRI: A Publicly Available Raw k-Space and DICOM Dataset of Knee Images for Accelerated MR Image Reconstruction Using Machine Learning | Radiology: AI | 2020 | [Paper](https://doi.org/10.1148/ryai.2020190007) | [fastMRI](https://fastmri.med.nyu.edu/) |
+| nuScenes: A Multimodal Dataset for Autonomous Driving | CVPR | 2020 | [Paper](https://openaccess.thecvf.com/content_CVPR_2020/html/Caesar_nuScenes_A_Multimodal_Dataset_for_Autonomous_Driving_CVPR_2020_paper.html) | [nuScenes](https://www.nuscenes.org/) |
+| Real-World Blur Dataset for Learning and Benchmarking Deblurring Algorithms | ECCV | 2020 | [Paper](https://doi.org/10.1007/978-3-030-58595-2_12) | [RealBlur](https://cg.postech.ac.kr/research/realblur/) |
+
+### Evaluation and provenance sources
+
+| Work | Venue | Year | Paper | Code / project |
+|---|---|---:|---|---|
+| Image quality assessment: from error visibility to structural similarity | IEEE TIP | 2004 | [Paper](https://doi.org/10.1109/TIP.2003.819861) | — |
+| No-Reference Image Quality Assessment in the Spatial Domain | IEEE TIP | 2012 | [Paper](https://doi.org/10.1109/TIP.2012.2214050) | — |
+| The Unreasonable Effectiveness of Deep Features as a Perceptual Metric | CVPR | 2018 | [Paper](https://doi.org/10.1109/CVPR.2018.00068) | [Code](https://github.com/richzhang/PerceptualSimilarity) |
+| MUSIQ: Multi-Scale Image Quality Transformer | ICCV | 2021 | [Paper](https://openaccess.thecvf.com/content/ICCV2021/html/Ke_MUSIQ_Multi-Scale_Image_Quality_Transformer_ICCV_2021_paper.html) | — |
+| Image Quality Assessment: Unifying Structure and Texture Similarity | IEEE TPAMI | 2022 | [Paper](https://doi.org/10.1109/TPAMI.2020.3045810) | [Code](https://github.com/dingkeyan93/DISTS) |
+| MANIQA: Multi-Dimension Attention Network for No-Reference Image Quality Assessment | CVPR Workshops | 2022 | [Paper](https://openaccess.thecvf.com/content/CVPR2022W/NTIRE/html/Yang_MANIQA_Multi-Dimension_Attention_Network_for_No-Reference_Image_Quality_Assessment_CVPRW_2022_paper.html) | [Code](https://github.com/IIGROUP/MANIQA) |
+| Exploring CLIP for Assessing the Look and Feel of Images | AAAI | 2023 | [Paper](https://doi.org/10.1609/aaai.v37i2.25353) | [Code](https://github.com/IceClear/CLIPIQA) |
+| C2PA Technical Specification, Version 2.4 | C2PA | 2026 | [Specification](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html) | — |
 
 ## Citation
 
