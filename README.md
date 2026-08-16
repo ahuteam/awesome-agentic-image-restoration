@@ -1,46 +1,79 @@
 # Agentic Image Restoration
 
-This repository provides supporting material for the paper **Agentic Image Restoration: A Structured Review**.
+Supporting materials for **Agentic Image Restoration: A Structured Review**.
 
-**Authors:** Yuezhe Yang, Chengru Li, Zhuodong Chai, Xingbo Dong, and Zhe Jin. Yuezhe Yang, Chengru Li, and Zhuodong Chai contributed equally to this work. Xingbo Dong is the corresponding author.
+This companion resource organizes the Agentic Image Restoration literature through a controller-centered taxonomy and provides source-linked papers, public implementations, benchmark resources, and evaluation guidance.
+
+<p align="center">
+  <img src="assets/figures/paradigm_comparison.png" alt="Comparison of conventional restoration, prompt-conditioned restoration, and restoration agents" width="900">
+</p>
 
 ## Contents
 
 - [Abstract](#abstract)
 - [Highlights](#highlights)
+- [Taxonomy](#taxonomy)
 - [Visual overview](#visual-overview)
-- [Paper index](#paper-index)
+- [Benchmarks and evaluation](#benchmarks-and-evaluation)
+- [Paper and code index](#paper-and-code-index)
 - [Citation](#citation)
 
 ## Abstract
 
 Multimodal foundation models and autonomous systems are extending image restoration from static forward mappings to closed-loop Agentic Image Restoration (AIR). Conventional CNN, Vision Transformer, and diffusion restorers follow predetermined inference procedures and usually lack explicit degradation diagnosis, runtime tool composition, output verification, or persistent experience. AIR introduces decision processes that observe intermediate states, select and execute restoration actions, assess the result, and may revise subsequent actions or memory. We review representative studies published from 2018 to 2026 and introduce a five-category controller taxonomy comprising Cybernetic Reinforcement Learning (P1), Prompt-Conditioned Restoration (P2), MLLM Reasoning and Tool Use (P3), Memory-Augmented Restoration Agents (P4), and Multi-Agent Restoration Systems (P5). A four-component anatomy of perception, decision, action, and reflection or memory provides an orthogonal descriptive framework. We synthesize evidence across natural photography, 4K super-resolution, autonomous driving, medical reconstruction, remote sensing, and scientific microscopy, followed by a protocol-aware discussion of benchmarks and evaluation.
 
-The supporting material is available at [https://github.com/ahuteam/awesome-agentic-image-restoration](https://github.com/ahuteam/awesome-agentic-image-restoration).
-
 ## Highlights
 
 - A four-component anatomy describes AIR systems through perception, decision, action, and reflection or memory.
 - A five-category taxonomy distinguishes reinforcement-learning controllers, prompt-conditioned restoration, MLLM tool use, memory-augmented agents, and multi-agent systems.
-- The paper index links each work to its publication record and to author-provided code or project pages when available.
-- Quantitative results in the paper are reported within their original datasets, degradations, and evaluation protocols.
-- Withdrawn or retracted records are removed after verification against the publisher or preprint record.
+- Each indexed work is linked to its publication record and to an author-provided code or project page when available.
+- Quantitative results retain their original datasets, degradations, metrics, and evaluation protocols.
+
+## Taxonomy
+
+| Category | Controller pattern | Defining capability |
+|---|---|---|
+| P1 | Cybernetic or reinforcement-learning controller | Selects actions, paths, regions, or parameters from feedback |
+| P2 | Prompt- or condition-routed restorer | Conditions a learned restoration mapping, usually without an external tool loop |
+| P3 | MLLM reasoning and tool use | Diagnoses degradation and orchestrates restoration tools |
+| P4 | Memory-augmented restoration agent | Retrieves, updates, or reuses restoration experience |
+| P5 | Multi-agent restoration system | Coordinates specialist agents or fast and slow roles |
+
+The categories follow the dominant runtime controller. Hybrid and boundary systems are indexed according to the mechanism that governs action selection, feedback, replanning, memory, or collaboration.
 
 ## Visual overview
 
-![Conventional restoration, prompt-conditioned restoration, and closed-loop restoration agents](assets/figures/paradigm_comparison.png)
-
 ### Four-component AIR anatomy
 
-![Four-component anatomy of agentic image restoration](assets/figures/air_anatomy.png)
+<p align="center">
+  <img src="assets/figures/air_anatomy.png" alt="Four-component anatomy of Agentic Image Restoration" width="900">
+</p>
+
+AIR systems can be described through four interacting components: perception, decision, action, and reflection or memory. This functional anatomy complements the P1-P5 controller taxonomy.
 
 ### Development timeline
 
-![Development timeline of agentic image restoration](assets/figures/development_timeline.png)
+<p align="center">
+  <img src="assets/figures/development_timeline.png" alt="Development timeline of Agentic Image Restoration" width="900">
+</p>
 
-## Paper index
+The controller families overlap in time. Reinforcement learning and prompt conditioning remain active while tool-using MLLMs, memory-guided search, and multi-agent coordination expand the decision space.
 
-Titles reproduce the linked publication records. The year column uses the year of the cited version of record or preprint and does not combine online-first and issue years.
+## Benchmarks and evaluation
+
+| Evaluation dimension | Representative scope |
+|---|---|
+| Restoration fidelity | PSNR and SSIM with the dataset, split, degradation, and reference availability reported |
+| Perceptual quality | LPIPS, DISTS, MANIQA, MUSIQ, CLIP-IQA, or other source-defined perceptual metrics |
+| Downstream utility | Detection, segmentation, recognition, reconstruction, or scientific measurement performance |
+| Agent execution | Tool calls, planning steps, retries, stopping rules, failure recovery, and worsening rate |
+| Efficiency | End-to-end latency, hardware, memory, model or API version, and execution budget |
+
+Results should be compared directly only when the input construction, degradation protocol, available tools, feedback function, and execution budget are aligned.
+
+## Paper and code index
+
+Titles reproduce the linked publication records. The year column gives the year of the cited version of record or preprint and does not combine online-first and issue years. A dash indicates that no author-linked public implementation was verified.
 
 ### P1: Cybernetic and reinforcement-learning agents
 
