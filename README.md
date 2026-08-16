@@ -13,12 +13,15 @@ This companion resource organizes the Agentic Image Restoration literature throu
 ## Contents
 
 - [Abstract](#abstract)
-- [Highlights](#highlights)
-- [Taxonomy](#taxonomy)
-- [Visual overview](#visual-overview)
-- [Benchmarks and evaluation](#benchmarks-and-evaluation)
+- [Manuscript structure](#manuscript-structure)
+- [Section 1: Introduction](#section-1--introduction)
+- [Section 2: Unified taxonomy](#section-2--unified-taxonomy-of-agentic-image-restoration-systems)
+- [Sections 3–7: Controller families](#sections-37--controller-families-and-related-systems)
+- [Section 8: Benchmarks and evaluation](#section-8--benchmarks-evaluation-protocols-and-system-metrics)
+- [Section 9: Future roadmaps](#section-9--open-challenges-and-strategic-future-roadmaps)
+- [Section 10: Conclusion](#section-10--conclusion)
+- [Section 11: Review methodology](#section-11--review-methodology)
 - [Evidence tables](EVIDENCE_TABLES.md)
-- [Paper and code index](#paper-and-code-index)
 - [Supporting references](#supporting-references)
 - [Citation](#citation)
 
@@ -26,14 +29,34 @@ This companion resource organizes the Agentic Image Restoration literature throu
 
 Multimodal foundation models and autonomous systems are extending image restoration from static forward mappings to closed-loop Agentic Image Restoration (AIR). Conventional CNN, Vision Transformer, and diffusion restorers follow predetermined inference procedures and usually lack explicit degradation diagnosis, runtime tool composition, output verification, or persistent experience. AIR introduces decision processes that observe intermediate states, select and execute restoration actions, assess the result, and may revise subsequent actions or memory. We review representative studies published from 2018 to 2026 and introduce a five-category controller taxonomy comprising Cybernetic Reinforcement Learning (P1), Prompt-Conditioned Restoration (P2), MLLM Reasoning and Tool Use (P3), Memory-Augmented Restoration Agents (P4), and Multi-Agent Restoration Systems (P5). A four-component anatomy of perception, decision, action, and reflection or memory provides an orthogonal descriptive framework. We synthesize evidence across natural photography, 4K super-resolution, autonomous driving, medical reconstruction, remote sensing, and scientific microscopy, followed by a protocol-aware discussion of benchmarks and evaluation.
 
-## Highlights
+## Manuscript structure
+
+| Section | Manuscript chapter | Material in this repository |
+|---:|---|---|
+| 1 | Introduction | Paradigm comparison, scope, foundations, application domains, and contributions |
+| 2 | Unified Taxonomy of Agentic Image Restoration Systems | Four-component anatomy, P1-P5 taxonomy, timeline, and architectural matrix |
+| 3 | Cybernetic Reinforcement Learning | P1 paper and code index, MDP-based control, and representative systems |
+| 4 | Prompt-Modulated and Condition-Routing Systems | P2 paper and code index, conditioning mechanisms, and P2-P3 boundary cases |
+| 5 | Single-MLLM Reasoning and Tool-Orchestrating Agents | General and domain-specific P3 controllers, planning, tools, and verification |
+| 6 | Memory-Augmented and Search-Guided Evolving Agents | Experience memory, search-guided decisions, causal memory, and source-reported examples |
+| 7 | Multi-Agent and Heterogeneous Collaborative Systems | Scheduler-specialist systems, fast-slow collaboration, and domain-specific coordination |
+| 8 | Benchmarks, Evaluation Protocols, and System Metrics | Evaluation suites, datasets, quantitative values, metrics, budgets, and reproducibility |
+| 9 | Open Challenges and Strategic Future Roadmaps | Physics-aware control, active acquisition, causal self-play, and provenance |
+| 10 | Conclusion | Taxonomy synthesis, boundary distinctions, and evaluation requirements |
+| 11 | Review Methodology | Review scope, search, eligibility, extraction, verification, and evidence synthesis |
+
+## Section 1 — Introduction
+
+The review treats restoration as a broad computational-imaging problem covering degradation removal, reconstruction, super-resolution, low-light and contrast enhancement, and related quality-improvement tasks. Section 1 contrasts fixed forward models, prompt-conditioned models, and closed-loop agents; introduces the physical degradation model and a POMDP abstraction for AIR; defines the review scope; and states the three main contributions. Figure 1 above provides the corresponding paradigm comparison.
+
+### Review contributions
 
 - A four-component anatomy describes AIR systems through perception, decision, action, and reflection or memory.
 - A five-category taxonomy distinguishes reinforcement-learning controllers, prompt-conditioned restoration, MLLM tool use, memory-augmented agents, and multi-agent systems.
 - Each indexed work is linked to its publication record and to an author-provided code or project page when available.
 - Quantitative results retain their original datasets, degradations, metrics, and evaluation protocols.
 
-## Taxonomy
+## Section 2 — Unified Taxonomy of Agentic Image Restoration Systems
 
 | Category | Controller pattern | Defining capability |
 |---|---|---|
@@ -45,7 +68,7 @@ Multimodal foundation models and autonomous systems are extending image restorat
 
 The categories follow the dominant runtime controller. Hybrid and boundary systems are indexed according to the mechanism that governs action selection, feedback, replanning, memory, or collaboration.
 
-## Visual overview
+### Figures 2 and 3
 
 ### Four-component AIR anatomy
 
@@ -63,25 +86,13 @@ The categories follow the dominant runtime controller. Hybrid and boundary syste
 
 <p align="center"><sub><strong>Figure 3.</strong> Representative AIR developments from 2018 to 2026 across cybernetic reinforcement learning, prompt-conditioned routing, MLLM tool orchestration, memory-augmented search, and multi-agent collaboration.</sub></p>
 
-## Benchmarks and evaluation
-
-| Evaluation dimension | Representative scope |
-|---|---|
-| Restoration fidelity | PSNR and SSIM with the dataset, split, degradation, and reference availability reported |
-| Perceptual quality | LPIPS, DISTS, MANIQA, MUSIQ, CLIP-IQA, or other source-defined perceptual metrics |
-| Downstream utility | Detection, segmentation, recognition, reconstruction, or scientific measurement performance |
-| Agent execution | Tool calls, planning steps, retries, stopping rules, failure recovery, and worsening rate |
-| Efficiency | End-to-end latency, hardware, memory, model or API version, and execution budget |
-
-Results should be compared directly only when the input construction, degradation protocol, available tools, feedback function, and execution budget are aligned.
-
-The complete source-aligned tables from the review are provided in **[Evidence Tables](EVIDENCE_TABLES.md)**. They include the architectural taxonomy, controller comparisons, benchmark datasets, all reported quantitative values, minimum metric families, and reproducibility requirements.
-
-## Paper and code index
+## Sections 3–7 — Controller Families and Related Systems
 
 Titles reproduce the linked publication records. The year column gives the year of the cited version of record or preprint and does not combine online-first and issue years. A dash indicates that no author-linked public implementation was verified.
 
-### P1: Cybernetic and reinforcement-learning agents
+### Section 3 — Cybernetic Reinforcement Learning
+
+Section 3 formulates cybernetic restoration as sequential decision making over observations, actions, transitions, rewards, and stopping rules. It follows the methodological progression from global parameter tuning and discrete toolchains to pixel-level policies, network-path routing, MRI sampling control, and region-specific acquisition policies.
 
 | Work | Venue | Year | Paper | Code / project |
 |---|---|---:|---|---|
@@ -97,7 +108,9 @@ Titles reproduce the linked publication records. The year column gives the year 
 | PaAgent: Portrait-Aware Image Restoration Agent via Subjective-Objective Reinforcement Learning | arXiv | 2026 | [Paper](https://arxiv.org/abs/2603.17055) | — |
 | Restore-R1: Efficient Image Restoration Agents via Reinforcement Learning with Multimodal LLM Perceptual Feedback | CVPR Findings | 2026 | [Paper](https://openaccess.thecvf.com/content/CVPR2026F/html/Lu_Restore-R1_Efficient_Image_Restoration_Agents_via_Reinforcement_Learning_with_Multimodal_CVPRF_2026_paper.html) | — |
 
-### P2: Prompt-conditioned restoration
+### Section 4 — Prompt-Modulated and Condition-Routing Systems
+
+Section 4 separates implicit or learned degradation prompts from language and vision-language conditioning. It also identifies the P2-P3 boundary: model-internal routing can be iterative without becoming an external tool-using MLLM agent, so controller location and runtime feedback determine the category.
 
 | Work | Venue | Year | Paper | Code / project |
 |---|---|---:|---|---|
@@ -114,7 +127,9 @@ Titles reproduce the linked publication records. The year column gives the year 
 | DreamClear: High-Capacity Real-World Image Restoration with Privacy-Safe Dataset Curation | NeurIPS | 2024 | [Paper](https://proceedings.neurips.cc/paper_files/paper/2024/hash/6452474601429509f3035dc81c233226-Abstract-Conference.html) | [Code](https://github.com/shallowdream204/DreamClear) |
 | UniRes: Universal Image Restoration for Complex Degradations | ICCV | 2025 | [Paper](https://openaccess.thecvf.com/content/ICCV2025/html/Zhou_UniRes_Universal_Image_Restoration_for_Complex_Degradations_ICCV_2025_paper.html) | — |
 
-### P3: MLLM reasoning and tool use
+### Section 5 — Single-MLLM Reasoning and Tool-Orchestrating Agents
+
+Section 5 follows the complete controller loop from explicit degradation diagnosis and task-coupled perception to planning, tool selection, verification, iteration, and rollback. The table includes general restoration controllers and application-specific systems in driving, MRI, cultural heritage, microscopy, remote sensing, and scientific imaging.
 
 | Work | Venue | Year | Paper | Code / project |
 |---|---|---:|---|---|
@@ -131,7 +146,9 @@ Titles reproduce the linked publication records. The year column gives the year 
 | OPERA: An Agent for Image Restoration with End-to-End Joint Planning–Execution Optimization | arXiv | 2026 | [Paper](https://arxiv.org/abs/2605.22104) | [Code](https://github.com/xsyshuishui/Opera) |
 | DiTTo: Scalable Order-Aware All-in-One Image Restoration Agent | arXiv | 2026 | [Paper](https://arxiv.org/abs/2605.30915) | [Project](https://cmlab-korea.github.io/DiTTo/) |
 
-### P4: Memory-augmented restoration agents
+### Section 6 — Memory-Augmented and Search-Guided Evolving Agents
+
+Section 6 distinguishes referenceable experience, episodic memory, deliberate search, and causal memory. AgenticIR uses depth-first rollback and stored experience, SEAR combines an intuitive executor with deliberate P-MCTS, and Causal-AgentIR updates a persistent causal memory graph.
 
 | Work | Venue | Year | Paper | Code / project |
 |---|---|---:|---|---|
@@ -139,7 +156,9 @@ Titles reproduce the linked publication records. The year column gives the year 
 | Self-Evolving Agentic Image Restoration via Deliberate Planning and Intuitive Execution | arXiv | 2026 | [Paper](https://arxiv.org/abs/2606.28971) | — |
 | Causal-AgentIR: Self-Evolving Causal Memory for Adaptive Image Restoration Agents | arXiv | 2026 | [Paper](https://arxiv.org/abs/2607.21125) | — |
 
-### P5: Multi-agent restoration systems
+### Section 7 — Multi-Agent and Heterogeneous Collaborative Systems
+
+Section 7 covers scheduler-specialist organisation, fast-slow collaboration, feedback roles, and domain-specific coordination. The systems differ in whether roles correspond to restoration experts, processing speeds, reasoning stages, or evidence-handling responsibilities.
 
 | Work | Venue | Year | Paper | Code / project |
 |---|---|---:|---|---|
@@ -148,25 +167,68 @@ Titles reproduce the linked publication records. The year column gives the year 
 | MAPGR: Multi-Agent Prompt-Guided Residual Diffusion for Ancient Mural Restoration | npj Heritage Science | 2026 | [Paper](https://doi.org/10.1038/s40494-026-02607-3) | [Code](https://github.com/tiskun101-oss/MAPGR) |
 | CLEAR: A Cognitive LLM-Empowered Adaptive Restoration Framework for Robust Ship Detection in Complex Maritime Scenarios | Remote Sensing | 2026 | [Paper](https://doi.org/10.3390/rs18081142) | — |
 
-### Domain extensions and evaluation suites
+### Cross-section domain extensions and evaluation suites
 
-| Work | Venue | Year | Paper | Code / project |
-|---|---|---:|---|---|
-| Self-Explained Thinking Agent for Autonomous Microscopy Restoration | Research Square | 2025 | [Paper](https://doi.org/10.21203/rs.3.rs-7116422/v1) | — |
-| RIR-Agent: An Interactive Framework for Effective and Adaptive Restoration of Remote Sensing Imagery | Expert Systems with Applications | 2026 | [Paper](https://doi.org/10.1016/j.eswa.2026.132495) | [Code](https://github.com/Arispur-311/RIR-Agent) |
-| Does AI Understand Imaging? A Systematic Benchmark of Agentic AI for Computational Imaging Tasks | arXiv | 2026 | [Paper](https://arxiv.org/abs/2607.07189) | — |
-| Imaging-101: Benchmarking LLM Coding Agents on Scientific Computational Imaging | arXiv | 2026 | [Paper](https://arxiv.org/abs/2607.10789) | [Code](https://github.com/AI4ImagingLab/imaging-101-release) |
-| Agentic Autoresearch for CT Reconstruction | arXiv | 2026 | [Paper](https://arxiv.org/abs/2607.22824) | — |
-| Prompt-Agent-Driven Integration of Foundation Model Priors for Low-Count PET Reconstruction | IEEE TMI | 2025 | [Paper](https://doi.org/10.1109/TMI.2025.3527155) | — |
-| PhotoAgent: Exploratory Visual Aesthetic Planning with Large Vision Models | arXiv | 2026 | [Paper](https://arxiv.org/abs/2602.22809) | [Code](https://github.com/mdyao/PhotoAgent) |
-| PhotoArtAgent: Intelligent Photo Retouching with Language Model-Based Artist Agents | arXiv | 2025 | [Paper](https://arxiv.org/abs/2505.23130) | — |
-| RetouchIQ: MLLM Agents for Instruction-Based Image Retouching with Generalist Reward | CVPR | 2026 | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Wu_RetouchIQ_MLLM_Agents_for_Instruction-Based_Image_Retouching_with_Generalist_Reward_CVPR_2026_paper.html) | — |
+| Work | Primary manuscript section | Venue | Year | Paper | Code / project |
+|---|---:|---|---:|---|---|
+| Self-Explained Thinking Agent for Autonomous Microscopy Restoration | 5 | Research Square | 2025 | [Paper](https://doi.org/10.21203/rs.3.rs-7116422/v1) | — |
+| RIR-Agent: An Interactive Framework for Effective and Adaptive Restoration of Remote Sensing Imagery | 5 | Expert Systems with Applications | 2026 | [Paper](https://doi.org/10.1016/j.eswa.2026.132495) | [Code](https://github.com/Arispur-311/RIR-Agent) |
+| Does AI Understand Imaging? A Systematic Benchmark of Agentic AI for Computational Imaging Tasks | 8 | arXiv | 2026 | [Paper](https://arxiv.org/abs/2607.07189) | — |
+| Imaging-101: Benchmarking LLM Coding Agents on Scientific Computational Imaging | 8 | arXiv | 2026 | [Paper](https://arxiv.org/abs/2607.10789) | [Code](https://github.com/AI4ImagingLab/imaging-101-release) |
+| Agentic Autoresearch for CT Reconstruction | 1 | arXiv | 2026 | [Paper](https://arxiv.org/abs/2607.22824) | — |
+| Prompt-Agent-Driven Integration of Foundation Model Priors for Low-Count PET Reconstruction | 1 | IEEE TMI | 2025 | [Paper](https://doi.org/10.1109/TMI.2025.3527155) | — |
+| PhotoAgent: Exploratory Visual Aesthetic Planning with Large Vision Models | 5, 6 | arXiv | 2026 | [Paper](https://arxiv.org/abs/2602.22809) | [Code](https://github.com/mdyao/PhotoAgent) |
+| PhotoArtAgent: Intelligent Photo Retouching with Language Model-Based Artist Agents | 5 | arXiv | 2025 | [Paper](https://arxiv.org/abs/2505.23130) | — |
+| RetouchIQ: MLLM Agents for Instruction-Based Image Retouching with Generalist Reward | 5 | CVPR | 2026 | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Wu_RetouchIQ_MLLM_Agents_for_Instruction-Based_Image_Retouching_with_Generalist_Reward_CVPR_2026_paper.html) | — |
+
+## Section 8 — Benchmarks, Evaluation Protocols, and System Metrics
+
+Section 8 covers agent evaluation suites and execution sandboxes, dataset and degradation-protocol families, source-traceable quantitative examples, multidimensional quality and utility metrics, execution behaviour, efficiency, safety, and the information required to reproduce an agent run.
+
+| Evaluation dimension | Representative scope |
+|---|---|
+| Restoration fidelity | PSNR and SSIM with the dataset, split, degradation, and reference availability reported |
+| Perceptual quality | LPIPS, DISTS, MANIQA, MUSIQ, CLIP-IQA, or other source-defined perceptual metrics |
+| Downstream utility | Detection, segmentation, recognition, reconstruction, or scientific measurement performance |
+| Agent execution | Tool calls, planning steps, retries, stopping rules, failure recovery, and worsening rate |
+| Efficiency | End-to-end latency, hardware, memory, model or API version, and execution budget |
+
+Results should be compared directly only when the input construction, degradation protocol, available tools, feedback function, and execution budget are aligned.
+
+The complete source-aligned tables from the review are provided in **[Evidence Tables](EVIDENCE_TABLES.md)**. They include the architectural taxonomy, controller comparisons, benchmark datasets, all reported quantitative values, minimum metric families, and reproducibility requirements.
+
+## Section 9 — Open Challenges and Strategic Future Roadmaps
+
+| Roadmap | Current basis in the review | Main requirement |
+|---|---|---|
+| Physics-aware planner and executor integration | OPERA links planning and execution optimisation | Test candidate outputs against image-formation models and report residuals and uncertainty |
+| Active acquisition and restoration | JarvisIR and MRI policies connect restoration decisions with downstream perception or measurement selection | Compare against matched passive acquisition under the same dose, time, energy, or motion budget |
+| Causal self-play and synthetic evolution | Causal-AgentIR updates a structured causal memory | Validate generated degradations against real sensor statistics and held-out real corruptions |
+| Provenance-certified restoration | C2PA 2.4 provides signed content credentials and provenance assertions | Record source assets, controller and tool versions, parameters, ordered actions, intermediate outputs, and uncertainty |
+
+## Section 10 — Conclusion
+
+The review organises AIR around four functional components and five controller families, while preserving distinctions between learned iterative models, tool-using controllers, memory-guided search, and distributed multi-agent roles. Current quantitative evidence remains fragmented across datasets, degradation mixtures, tool pools, metrics, stopping rules, and budgets. Reliable progress therefore requires fixed test generation, disclosed versions and action spaces, complete execution budgets, repeated trials, and explicit failure reporting.
+
+## Section 11 — Review Methodology
+
+| Item | Manuscript specification |
+|---|---|
+| Review question | How restoration becomes agentic at inference time, which controller designs have been reported, and how outputs and decision processes have been evaluated |
+| Review period | January 2018 to August 2026 |
+| Sources searched | PubMed, IEEE Xplore, ACM Digital Library, SpringerLink, ScienceDirect, CVF Open Access, OpenReview, arXiv, Research Square, and identified proceedings or publisher pages |
+| Final update and verification | Search updated on 9 August 2026; bibliographic and publication-status verification completed on 16 August 2026 |
+| Primary eligibility | A runtime controller affecting restoration, reconstruction, enhancement, acquisition, or correction, with an identifiable decision interface, action space, feedback process, or memory mechanism |
+| Boundary category | Prompt-conditioned systems retained when prompts or degradation representations explicitly controlled restoration behaviour |
+| Exclusions | Attention mechanisms merely called agents, search or RL used only during architecture development, systems without a restoration-related runtime decision process, duplicates, withdrawn records, and retracted records |
+| Extracted fields | Title, authors, venue, year, paper and code links, domain, controller type, perception, action space, feedback, memory, and protocol-bound numerical results |
+| Evidence synthesis | Descriptive and protocol-aware; no pooled meta-analysis across incompatible datasets, degradation mixtures, tools, stopping rules, or metric implementations |
 
 ## Supporting references
 
 The following sources are discussed in the review as restoration foundations, adjacent imaging methods, benchmark definitions, evaluation metrics, or provenance standards. They are separated from the P1-P5 controller index so that the taxonomy remains readable.
 
-### Restoration and multimodal foundations
+### Section 1 — Restoration and multimodal foundations
 
 | Work | Venue | Year | Paper | Code / project |
 |---|---|---:|---|---|
@@ -181,7 +243,7 @@ The following sources are discussed in the review as restoration foundations, ad
 | Towards Robust Blind Face Restoration with Codebook Lookup Transformer | NeurIPS | 2022 | [Paper](https://proceedings.neurips.cc/paper_files/paper/2022/hash/c573258c38d0a3919d8c1364053c45df-Abstract-Conference.html) | [Code](https://github.com/sczhou/CodeFormer) |
 | Exploiting Diffusion Prior for Real-World Image Super-Resolution | IJCV | 2024 | [Paper](https://doi.org/10.1007/s11263-024-02168-7) | [Code](https://github.com/IceClear/StableSR) |
 
-### Imaging restoration examples discussed in the review
+### Section 1 — Imaging restoration examples
 
 | Work | Venue | Year | Paper | Code / project |
 |---|---|---:|---|---|
@@ -194,7 +256,7 @@ The following sources are discussed in the review as restoration foundations, ad
 | EvRWKV: A Continuous Interactive RWKV Framework for Effective Event-Guided Low-Light Image Enhancement | IEEE TCSVT | 2026 | [Paper](https://doi.org/10.1109/TCSVT.2026.3672491) | — |
 | PriP: A Training-Free Low-Light Image Enhancement Framework via Content and Illumination Synergistic Guidance | Computers & Graphics | 2026 | [Paper](https://doi.org/10.1016/j.cag.2026.104676) | — |
 
-### Dataset and benchmark sources
+### Sections 1 and 8 — Dataset and benchmark sources
 
 | Work | Venue | Year | Paper | Dataset / project |
 |---|---|---:|---|---|
@@ -208,7 +270,7 @@ The following sources are discussed in the review as restoration foundations, ad
 | nuScenes: A Multimodal Dataset for Autonomous Driving | CVPR | 2020 | [Paper](https://openaccess.thecvf.com/content_CVPR_2020/html/Caesar_nuScenes_A_Multimodal_Dataset_for_Autonomous_Driving_CVPR_2020_paper.html) | [nuScenes](https://www.nuscenes.org/) |
 | Real-World Blur Dataset for Learning and Benchmarking Deblurring Algorithms | ECCV | 2020 | [Paper](https://doi.org/10.1007/978-3-030-58595-2_12) | [RealBlur](https://cg.postech.ac.kr/research/realblur/) |
 
-### Evaluation and provenance sources
+### Sections 1, 2, 8, and 9 — Evaluation and provenance sources
 
 | Work | Venue | Year | Paper | Code / project |
 |---|---|---:|---|---|

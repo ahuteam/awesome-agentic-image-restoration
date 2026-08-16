@@ -1,22 +1,37 @@
 # Evidence Tables
 
-These tables accompany **Agentic Image Restoration: A Structured Review**. Terminology, datasets, metrics, and numerical values follow the source-aligned manuscript. Values from different datasets or protocols should not be treated as a pooled leaderboard.
+These tables accompany **Agentic Image Restoration: A Structured Review**. Each table is assigned to the corresponding manuscript section. Terminology, datasets, metrics, and numerical values follow the source-aligned manuscript. Values from different datasets or protocols should not be treated as a pooled leaderboard.
 
 [Back to the project overview](README.md)
 
 ## Contents
 
-- [Architectural taxonomy](#architectural-taxonomy)
-- [Prompt-conditioned systems](#prompt-conditioned-systems)
-- [General restoration and editing controllers](#general-restoration-and-editing-controllers)
-- [Application-specific controllers](#application-specific-controllers)
-- [Memory and search systems](#memory-and-search-systems)
-- [Multi-agent systems](#multi-agent-systems)
-- [Benchmark datasets](#benchmark-datasets)
-- [Representative quantitative results](#representative-quantitative-results)
-- [Evaluation and reproducibility](#evaluation-and-reproducibility)
+- [Section 2: Architectural taxonomy](#section-2--architectural-taxonomy)
+- [Section 4: Prompt-conditioned systems](#section-4--prompt-conditioned-systems)
+- [Section 5: General restoration and editing controllers](#section-5--general-restoration-and-editing-controllers)
+- [Section 5: Application-specific controllers](#section-5--application-specific-controllers)
+- [Section 6: Memory and search systems](#section-6--memory-and-search-systems)
+- [Section 7: Multi-agent systems](#section-7--multi-agent-systems)
+- [Section 8: Benchmark datasets](#section-8--benchmark-datasets)
+- [Section 8: Representative quantitative results](#section-8--representative-quantitative-results)
+- [Section 8: Evaluation and reproducibility](#section-8--evaluation-and-reproducibility)
 
-## Architectural taxonomy
+## Manuscript table crosswalk
+
+| Manuscript section | Table content | Repository location |
+|---:|---|---|
+| 2 | Architectural taxonomy, Parts I-III | [Architectural taxonomy](#section-2--architectural-taxonomy) |
+| 4 | Mechanism-level comparison of prompt-conditioned systems | [Prompt-conditioned systems](#section-4--prompt-conditioned-systems) |
+| 5 | General restoration and editing controllers | [General controllers](#section-5--general-restoration-and-editing-controllers) |
+| 5 | Application-specific restoration controllers | [Application-specific controllers](#section-5--application-specific-controllers) |
+| 6 | Memory and search systems | [Memory and search](#section-6--memory-and-search-systems) |
+| 7 | Multi-agent and heterogeneous systems | [Multi-agent systems](#section-7--multi-agent-systems) |
+| 8 | Benchmark dataset taxonomy | [Benchmark datasets](#section-8--benchmark-datasets) |
+| 8 | Source-traceable quantitative examples | [Quantitative results](#section-8--representative-quantitative-results) |
+| 8 | Minimum metric families | [Minimum metric families](#minimum-metric-families) |
+| 8 | Reproducible agent-evaluation protocol | [Protocol requirements](#protocol-information-required-for-reproducible-agent-evaluation) |
+
+## Section 2 — Architectural taxonomy
 
 | Work | Category | Venue / year | Perception | Action | Feedback / memory | Domain |
 |---|---|---|---|---|---|---|
@@ -49,7 +64,7 @@ These tables accompany **Agentic Image Restoration: A Structured Review**. Termi
 | Hybrid Agents | P5 | CVPR 2026 | Fast, Slow, and Feedback agents | Request-dependent restoration | Feedback-based selection | Natural images |
 | MAPGR | P5 | npj Heritage Science 2026 | Visual reasoning, prompt, and execution roles | Residual diffusion | Evidence propagation and abstention | Cultural heritage |
 
-## Prompt-conditioned systems
+## Section 4 — Prompt-conditioned systems
 
 | Work | Venue / year | Conditioning signal | Restoration interface | Runtime loop |
 |---|---|---|---|---|
@@ -66,7 +81,7 @@ These tables accompany **Agentic Image Restoration: A Structured Review**. Termi
 | SUPIR | CVPR 2024 | Semantic and perceptual condition | Generative restoration model | Open |
 | DreamClear | NeurIPS 2024 | Real-world degradation and semantic condition | Generative restoration model | Open |
 
-## General restoration and editing controllers
+## Section 5 — General restoration and editing controllers
 
 | Work and status | Controller | Execution | Feedback |
 |---|---|---|---|
@@ -82,7 +97,7 @@ These tables accompany **Agentic Image Restoration: A Structured Review**. Termi
 | FAPE-IR, CVPR 2026 | Frozen MLLM planner | LoRA-MoE diffusion executor | Restoration objective across seven tasks |
 | RAR, CVPR 2026 boundary case | Learned latent controller | End-to-end latent iterations | Learned assessment without an external MLLM tool loop |
 
-## Application-specific controllers
+## Section 5 — Application-specific controllers
 
 | Work and status | Controller | Execution | Feedback |
 |---|---|---|---|
@@ -93,7 +108,7 @@ These tables accompany **Agentic Image Restoration: A Structured Review**. Termi
 | FMIRAgent, Research Square 2025 | Self-explaining MLLM assistant | Microscopy restoration algorithms | User or simulated iterative feedback |
 | RIR-Agent, ESWA 2026 | MLLM perception and LLM planner | Remote-sensing toolbox | Adaptation, rollback, or manual feedback |
 
-## Memory and search systems
+## Section 6 — Memory and search systems
 
 | Work | Status | Search / control | Memory | Source-reported example |
 |---|---|---|---|---|
@@ -101,7 +116,7 @@ These tables accompany **Agentic Image Restoration: A Structured Review**. Termi
 | SEAR | Preprint 2026 | Intuitive executor and deliberate P-MCTS | Episodic state fingerprints | MiO100 Group A: 21.8042 dB PSNR and 0.6961 SSIM; Group B memory ablation: 8.15 versus 16.75 tool calls |
 | Causal-AgentIR | Preprint 2026 | Multi-agent causal reasoning | Self-evolving causal memory | All-in-one five-task average: 35.55 dB PSNR |
 
-## Multi-agent systems
+## Section 7 — Multi-agent systems
 
 | Work | Venue / year | Roles | Coordination | Source-reported example |
 |---|---|---|---|---|
@@ -110,7 +125,7 @@ These tables accompany **Agentic Image Restoration: A Structured Review**. Termi
 | MAPGR | npj Heritage Science 2026 | Visual reasoning, prompt, and execution roles | Prompt-guided dual-stream residual diffusion | Evidence propagation with low-confidence abstention |
 | CLEAR | Remote Sensing 2026 | Fast and slow processing | Conditional restoration before detection | Overall mAP50 of 86.92%; 11.8 FPS assumes a 5% trigger rate |
 
-## Benchmark datasets
+## Section 8 — Benchmark datasets
 
 | Dataset | Domain | Degradation types | Primary evaluation focus | Representative AIR works |
 |---|---|---|---|---|
@@ -129,7 +144,7 @@ These tables accompany **Agentic Image Restoration: A Structured Review**. Termi
 | AAPM Low-Dose CT | Medical CT | Low-photon Poisson noise and streak artefacts | Iterative reconstruction parameter tuning | Shen et al., Patwari et al. |
 | nuScenes and HRSC-Robust | Autonomous driving and maritime remote sensing | Fog, rain, snow, low light, and other adverse conditions | Downstream driving and ship-detection performance | JarvisIR, CLEAR |
 
-## Representative quantitative results
+## Section 8 — Representative quantitative results
 
 | Work | Dataset / setting | Primary metric | Result |
 |---|---|---|---|
@@ -170,7 +185,7 @@ These tables accompany **Agentic Image Restoration: A Structured Review**. Termi
 | Hybrid Agents | LOL, fast route enabled versus disabled | PSNR / SSIM | 22.60 / 0.825 versus 22.61 / 0.828 |
 | Causal-AgentIR | Five-task average: Test100, Snow100K, SOTS-Indoor, GoPro, CBSD68 | PSNR / SSIM | 35.55 dB / 0.964 |
 
-## Evaluation and reproducibility
+## Section 8 — Evaluation and reproducibility
 
 ### Minimum metric families
 
