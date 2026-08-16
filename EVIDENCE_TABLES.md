@@ -1,210 +1,205 @@
-# Evidence Tables
+# Source-Linked Tables
 
-These tables accompany **Agentic Image Restoration: A Structured Review**. Each table is assigned to the corresponding manuscript section. Terminology, datasets, metrics, and numerical values follow the source-aligned manuscript. Values from different datasets or protocols should not be treated as a pooled leaderboard.
+These tables accompany **Agentic Image Restoration: A Structured Review** and follow the manuscript order. Every literature row links to the cited paper and to an author-provided code repository or project page when one was verified. A dash means that no author-linked public implementation was verified.
 
 [Back to the project overview](README.md)
 
-## Contents
-
-- [Section 2: Architectural taxonomy](#section-2--architectural-taxonomy)
-- [Section 4: Prompt-conditioned systems](#section-4--prompt-conditioned-systems)
-- [Section 5: General restoration and editing controllers](#section-5--general-restoration-and-editing-controllers)
-- [Section 5: Application-specific controllers](#section-5--application-specific-controllers)
-- [Section 6: Memory and search systems](#section-6--memory-and-search-systems)
-- [Section 7: Multi-agent systems](#section-7--multi-agent-systems)
-- [Section 8: Benchmark datasets](#section-8--benchmark-datasets)
-- [Section 8: Representative quantitative results](#section-8--representative-quantitative-results)
-- [Section 8: Evaluation and reproducibility](#section-8--evaluation-and-reproducibility)
-
-## Manuscript table crosswalk
-
-| Manuscript section | Table content | Repository location |
-|---:|---|---|
-| 2 | Architectural taxonomy, Parts I-III | [Architectural taxonomy](#section-2--architectural-taxonomy) |
-| 4 | Mechanism-level comparison of prompt-conditioned systems | [Prompt-conditioned systems](#section-4--prompt-conditioned-systems) |
-| 5 | General restoration and editing controllers | [General controllers](#section-5--general-restoration-and-editing-controllers) |
-| 5 | Application-specific restoration controllers | [Application-specific controllers](#section-5--application-specific-controllers) |
-| 6 | Memory and search systems | [Memory and search](#section-6--memory-and-search-systems) |
-| 7 | Multi-agent and heterogeneous systems | [Multi-agent systems](#section-7--multi-agent-systems) |
-| 8 | Benchmark dataset taxonomy | [Benchmark datasets](#section-8--benchmark-datasets) |
-| 8 | Source-traceable quantitative examples | [Quantitative results](#section-8--representative-quantitative-results) |
-| 8 | Minimum metric families | [Minimum metric families](#minimum-metric-families) |
-| 8 | Reproducible agent-evaluation protocol | [Protocol requirements](#protocol-information-required-for-reproducible-agent-evaluation) |
-
 ## Section 2 — Architectural taxonomy
 
-| Work | Category | Venue / year | Perception | Action | Feedback / memory | Domain |
-|---|---|---|---|---|---|---|
-| RL-Restore | P1 | CVPR 2018 | CNN state features | Discrete operator pool (12) | PSNR reward and stop action | Natural images |
-| Distort-and-Recover | P1 | CVPR 2018 | Global image state | Discrete global colour actions | Unpaired distort-and-recover reward | Photo retouching |
-| PixelRL | P1 | AAAI 2019 | Pixel-wise spatial context | Pixel-level discrete actions | Multi-step pixel reward | Natural images |
-| Path-Restore | P1 | TPAMI 2022 | Path-complexity router | Sub-network routing paths | Efficiency-gain signal | Natural images |
-| CT-DRL | P1 | TMI 2018 | Iteration-state features | Reconstruction parameters | Scalar quality reward | Medical CT |
-| MRI-RL | P1 | Neurocomputing 2024 | Dual k-space states | Sampling-trajectory actions | SSIM reward | Medical MRI |
-| AirNet | P2 | CVPR 2022 | Contrastive degradation embedding | Single-backbone feature modulation | Open loop | Natural images |
-| PromptIR | P2 | NeurIPS 2023 | Input-conditioned learned prompts | Prompt-modulated Transformer | Open loop | Natural images |
-| InstructIR | P2 | ECCV 2024 | Natural-language instruction parsing | Instruction-conditioned network | Open loop | Natural images |
-| DA-CLIP | P2 | ICLR 2024 | CLIP content and degradation embeddings | Content and degradation control | Open loop | Natural images |
-| AutoDIR | P2/B | ECCV 2024 | BIQA degradation identification or text | Structure-corrected latent diffusion | Iterative BIQA routing | Natural images |
-| OneRestore | P2 | ECCV 2024 | Scene and degradation description | Composite-degradation restorer | Open loop | Natural images |
-| Clarity ChatGPT | P3 | Preprint 2023 | ChatGPT and CLIP degradation detection | Classical and deep-learning tool set | Iterative user feedback | Natural images |
-| RestoreAgent | P3 | NeurIPS 2024 | MLLM degradation report | Scored deep-learning API registry | History-based replanning and rollback | Natural images |
-| JarvisIR | P3 | CVPR 2025 | Driving VLM diagnosis | Weather-operator pipeline | IQA reward and perception evaluation | Autonomous driving |
-| 4KAgent | P3 | NeurIPS 2025 | VLM and IQA perception | Quality-driven mixture of experts | Recursive execution and reflection | Super-resolution |
-| RAR | P2/B | CVPR 2026 | Learned latent assessor | End-to-end latent restoration | Restore-assess-repeat | Natural images |
-| AgentMRI | P3 | JIIM 2026 | Medical VLM classification | Three CycleGAN correction paths | Consensus gate and stop decision | Medical MRI |
-| EpiAgent | P3 | CVPR 2026 | Observe-conceive loop | Inscription-restoration tools | Execute-reevaluate refinement | Cultural heritage |
-| SIMBA | P3 | Preprint 2026 | Natural-language scientific description | JSON tool-call sequences | Execution verification | Microscopy |
-| FAPE-IR | P3 | CVPR 2026 | Frequency-aware planner | High- and low-frequency LoRA experts | Planner-conditioned execution | Natural images |
-| Restore-R1 | P1/B | CVPR Findings 2026 | Frozen visual encoder | RL-learned tool selector | DeQA-Score increment | Natural images |
-| AgenticIR | P4 | ICLR 2025 | Multimodal diagnosis | Specialised tool registry | Depth-first rollback and experience | Natural images |
-| SEAR | P4 | Preprint 2026 | Episodic fingerprint | Intuitive executor and deliberate planner | P-MCTS with episodic memory | Natural images |
-| Causal-AgentIR | P4 | Preprint 2026 | Quality, degradation, and history | Causal memory graph | Persistent graph updating | Natural images |
-| MAIR | P5 | IJCV 2026 | Scheduler | Seven specialist agents | Sequential scheduling and candidate comparison | Natural images |
-| Hybrid Agents | P5 | CVPR 2026 | Fast, Slow, and Feedback agents | Request-dependent restoration | Feedback-based selection | Natural images |
-| MAPGR | P5 | npj Heritage Science 2026 | Visual reasoning, prompt, and execution roles | Residual diffusion | Evidence propagation and abstention | Cultural heritage |
+| Work | Category | Venue / year | Perception | Action | Feedback / memory | Domain | Paper | Code / project |
+|---|---|---|---|---|---|---|---|---|
+| RL-Restore | P1 | CVPR 2018 | CNN state features | Discrete operator pool (12) | PSNR reward and stop action | Natural images | [Paper](https://openaccess.thecvf.com/content_cvpr_2018/html/Yu_Crafting_a_Toolchain_CVPR_2018_paper.html) | [Code](https://github.com/yuke93/RL-Restore) |
+| Distort-and-Recover | P1 | CVPR 2018 | Global image state | Discrete global colour actions | Unpaired distort-and-recover reward | Photo retouching | [Paper](https://openaccess.thecvf.com/content_cvpr_2018/html/Park_Distort-and-Recover_Color_Enhancement_CVPR_2018_paper.html) | — |
+| PixelRL | P1 | AAAI 2019 | Pixel-wise spatial context | Pixel-level discrete actions | Multi-step pixel reward | Natural images | [Paper](https://doi.org/10.1609/aaai.v33i01.33013598) | [Code](https://github.com/rfuruta/pixelRL) |
+| Path-Restore | P1 | TPAMI 2022 | Path-complexity router | Sub-network routing paths | Efficiency-gain signal | Natural images | [Paper](https://doi.org/10.1109/TPAMI.2021.3080863) | [Code](https://github.com/yuke93/Path-Restore) |
+| CT-DRL | P1 | TMI 2018 | Iteration-state features | Reconstruction parameters | Scalar quality reward | Medical CT | [Paper](https://doi.org/10.1109/TMI.2018.2823679) | [Code](https://github.com/heixscy88/TMI_parameter_tuning) |
+| MRI-RL | P1 | Neurocomputing 2024 | Dual k-space states | Sampling-trajectory actions | SSIM reward | Medical MRI | [Paper](https://doi.org/10.1016/j.neucom.2023.127067) | [Code](https://github.com/yanweipang/mri) |
+| AirNet | P2 | CVPR 2022 | Contrastive degradation embedding | Single-backbone feature modulation | Open loop | Natural images | [Paper](https://openaccess.thecvf.com/content/CVPR2022/html/Li_All-in-One_Image_Restoration_for_Unknown_Corruption_CVPR_2022_paper.html) | [Code](https://github.com/XLearning-SCU/2022-CVPR-AirNet) |
+| PromptIR | P2 | NeurIPS 2023 | Input-conditioned learned prompts | Prompt-modulated Transformer | Open loop | Natural images | [Paper](https://proceedings.neurips.cc/paper_files/paper/2023/hash/e187897ed7780a8c3f50a8fc8997e6b1-Abstract-Conference.html) | [Code](https://github.com/va1shn9v/PromptIR) |
+| InstructIR | P2 | ECCV 2024 | Natural-language instruction parsing | Instruction-conditioned network | Open loop | Natural images | [Paper](https://arxiv.org/abs/2401.16468) | [Code](https://github.com/mv-lab/InstructIR) |
+| DA-CLIP | P2 | ICLR 2024 | CLIP content and degradation embeddings | Content and degradation control | Open loop | Natural images | [Paper](https://openreview.net/forum?id=HBA5UGjv7r) | [Code](https://github.com/Algolzw/daclip-uir) |
+| AutoDIR | P2/B | ECCV 2024 | BIQA degradation identification or text | Structure-corrected latent diffusion | Iterative BIQA routing | Natural images | [Paper](https://arxiv.org/abs/2310.10123) | [Code](https://github.com/jiangyitong/AutoDIR) |
+| OneRestore | P2 | ECCV 2024 | Scene and degradation description | Composite-degradation restorer | Open loop | Natural images | [Paper](https://arxiv.org/abs/2407.04621) | [Code](https://github.com/gy65896/OneRestore) |
+| Clarity ChatGPT | P3 | Preprint 2023 | ChatGPT and CLIP degradation detection | Classical and deep-learning tool set | Iterative user feedback | Natural images | [Paper](https://arxiv.org/abs/2311.11695) | — |
+| RestoreAgent | P3 | NeurIPS 2024 | MLLM degradation report | Scored deep-learning API registry | History-based replanning and rollback | Natural images | [Paper](https://proceedings.neurips.cc/paper_files/paper/2024/hash/c78f639424b8d89ceb4f2efbb4dfe4f4-Abstract.html) | [Project](https://haoyuchen.com/RestoreAgent) |
+| JarvisIR | P3 | CVPR 2025 | Driving VLM diagnosis | Weather-operator pipeline | IQA reward and perception evaluation | Autonomous driving | [Paper](https://openaccess.thecvf.com/content/CVPR2025/html/Lin_JarvisIR_Elevating_Autonomous_Driving_Perception_with_Intelligent_Image_Restoration_CVPR_2025_paper.html) | [Code](https://github.com/LYL1015/JarvisIR) |
+| 4KAgent | P3 | NeurIPS 2025 | VLM and IQA perception | Quality-driven mixture of experts | Recursive execution and reflection | Super-resolution | [Paper](https://proceedings.neurips.cc/paper_files/paper/2025/hash/f0075fe4e59652cf43148dcfab8d3c93-Abstract-Conference.html) | [Code](https://github.com/taco-group/4KAgent) |
+| RAR | P2/B | CVPR 2026 | Learned latent assessor | End-to-end latent restoration | Restore-assess-repeat | Natural images | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Chen_Restore_Assess_Repeat_A_Unified_Framework_for_Iterative_Image_Restoration_CVPR_2026_paper.html) | [Code](https://github.com/saic-fi/RAR) |
+| AgentMRI | P3 | JIIM 2026 | Medical VLM classification | Three CycleGAN correction paths | Consensus gate and stop decision | Medical MRI | [Paper](https://doi.org/10.1007/s10278-025-01617-0) | — |
+| EpiAgent | P3 | CVPR 2026 | Observe-conceive loop | Inscription-restoration tools | Execute-reevaluate refinement | Cultural heritage | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Zhu_EpiAgent_An_Agent-Centric_System_for_Ancient_Inscription_Restoration_CVPR_2026_paper.html) | [Code](https://github.com/blackprotoss/EpiAgent) |
+| SIMBA | P3 | Preprint 2026 | Natural-language scientific description | JSON tool-call sequences | Execution verification | Microscopy | [Paper](https://doi.org/10.64898/2026.04.16.719005) | [Project](https://simba-website-indol.vercel.app/) |
+| FAPE-IR | P3 | CVPR 2026 | Frequency-aware planner | High- and low-frequency LoRA experts | Planner-conditioned execution | Natural images | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Liu_FAPE-IR_Frequency-Aware_Planning_and_Execution_Framework_for_All-in-One_Image_Restoration_CVPR_2026_paper.html) | [Code](https://github.com/Programmergg/FAPE-IR) |
+| Restore-R1 | P1/B | CVPR Findings 2026 | Frozen visual encoder | RL-learned tool selector | DeQA-Score increment | Natural images | [Paper](https://openaccess.thecvf.com/content/CVPR2026F/html/Lu_Restore-R1_Efficient_Image_Restoration_Agents_via_Reinforcement_Learning_with_Multimodal_CVPRF_2026_paper.html) | — |
+| AgenticIR | P4 | ICLR 2025 | Multimodal diagnosis | Specialised tool registry | Depth-first rollback and experience | Natural images | [Paper](https://proceedings.iclr.cc/paper_files/paper/2025/hash/921ac785fa9edc73cacaf2664f43d234-Abstract-Conference.html) | [Code](https://github.com/Kaiwen-Zhu/AgenticIR) |
+| SEAR | P4 | Preprint 2026 | Episodic fingerprint | Intuitive executor and deliberate planner | P-MCTS with episodic memory | Natural images | [Paper](https://arxiv.org/abs/2606.28971) | — |
+| Causal-AgentIR | P4 | Preprint 2026 | Quality, degradation, and history | Causal memory graph | Persistent graph updating | Natural images | [Paper](https://arxiv.org/abs/2607.21125) | — |
+| MAIR | P5 | IJCV 2026 | Scheduler | Seven specialist agents | Sequential scheduling and candidate comparison | Natural images | [Paper](https://doi.org/10.1007/s11263-026-02792-5) | [Project](https://villa.jianzhang.tech/publication/200604/) |
+| Hybrid Agents | P5 | CVPR 2026 | Fast, Slow, and Feedback agents | Request-dependent restoration | Feedback-based selection | Natural images | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Hybrid_Agents_for_Image_Restoration_CVPR_2026_paper.html) | — |
+| MAPGR | P5 | npj Heritage Science 2026 | Visual reasoning, prompt, and execution roles | Residual diffusion | Evidence propagation and abstention | Cultural heritage | [Paper](https://doi.org/10.1038/s40494-026-02607-3) | [Code](https://github.com/tiskun101-oss/MAPGR) |
 
 ## Section 4 — Prompt-conditioned systems
 
-| Work | Venue / year | Conditioning signal | Restoration interface | Runtime loop |
-|---|---|---|---|---|
-| AirNet | CVPR 2022 | Contrastive degradation representation | Unified restoration network | Open |
-| PromptIR | NeurIPS 2023 | Learned degradation prompts | Prompt-modulated Transformer | Open |
-| InstructIR | ECCV 2024 | Natural-language instruction | Instruction-conditioned network | Open |
-| DA-CLIP | ICLR 2024 | Degradation-aware CLIP representation | Conditioned restoration network | Open |
-| MPerceiver | CVPR 2024 | Multimodal prompt perception | Multi-task restoration network | Model-internal |
-| AutoDIR | ECCV 2024 | BIQA-inferred degradation or user text | Structure-corrected latent diffusion | Iterative BIQA routing |
-| OneRestore | ECCV 2024 | Scene and degradation representation | Composite-degradation restorer | Open |
-| LDR | CVPR 2024 | Vision-language degradation description | Sparse MoE restoration network | Model-internal |
-| SPIRE | ECCV 2024 | Content and restoration-strength text prompts | Controlled generative restorer | Open |
-| UniRes | ICCV 2025 | Complex-degradation formulation | Specialists combined during diffusion sampling | Model-internal |
-| SUPIR | CVPR 2024 | Semantic and perceptual condition | Generative restoration model | Open |
-| DreamClear | NeurIPS 2024 | Real-world degradation and semantic condition | Generative restoration model | Open |
+| Work | Venue / year | Conditioning signal | Restoration interface | Runtime loop | Paper | Code / project |
+|---|---|---|---|---|---|---|
+| AirNet | CVPR 2022 | Contrastive degradation representation | Unified restoration network | Open | [Paper](https://openaccess.thecvf.com/content/CVPR2022/html/Li_All-in-One_Image_Restoration_for_Unknown_Corruption_CVPR_2022_paper.html) | [Code](https://github.com/XLearning-SCU/2022-CVPR-AirNet) |
+| PromptIR | NeurIPS 2023 | Learned degradation prompts | Prompt-modulated Transformer | Open | [Paper](https://proceedings.neurips.cc/paper_files/paper/2023/hash/e187897ed7780a8c3f50a8fc8997e6b1-Abstract-Conference.html) | [Code](https://github.com/va1shn9v/PromptIR) |
+| InstructIR | ECCV 2024 | Natural-language instruction | Instruction-conditioned network | Open | [Paper](https://arxiv.org/abs/2401.16468) | [Code](https://github.com/mv-lab/InstructIR) |
+| DA-CLIP | ICLR 2024 | Degradation-aware CLIP representation | Conditioned restoration network | Open | [Paper](https://openreview.net/forum?id=HBA5UGjv7r) | [Code](https://github.com/Algolzw/daclip-uir) |
+| MPerceiver | CVPR 2024 | Multimodal prompt perception | Multi-task restoration network | Model-internal | [Paper](https://openaccess.thecvf.com/content/CVPR2024/html/Ai_Multimodal_Prompt_Perceiver_Empower_Adaptiveness_Generalizability_and_Fidelity_for_All-in-One_CVPR_2024_paper.html) | [Code](https://github.com/hhb072/MPerceiver-Code) |
+| AutoDIR | ECCV 2024 | BIQA-inferred degradation or user text | Structure-corrected latent diffusion | Iterative BIQA routing | [Paper](https://arxiv.org/abs/2310.10123) | [Code](https://github.com/jiangyitong/AutoDIR) |
+| OneRestore | ECCV 2024 | Scene and degradation representation | Composite-degradation restorer | Open | [Paper](https://arxiv.org/abs/2407.04621) | [Code](https://github.com/gy65896/OneRestore) |
+| LDR | CVPR 2024 | Vision-language degradation description | Sparse MoE restoration network | Model-internal | [Paper](https://openaccess.thecvf.com/content/CVPR2024/html/Yang_Language-driven_All-in-one_Adverse_Weather_Removal_CVPR_2024_paper.html) | [Code](https://github.com/noxsine/LDR) |
+| SPIRE | ECCV 2024 | Content and restoration-strength text prompts | Controlled generative restorer | Open | [Paper](https://arxiv.org/abs/2312.11595) | [Project](https://chenyangqiqi.github.io/tip/) |
+| UniRes | ICCV 2025 | Complex-degradation formulation | Specialists combined during diffusion sampling | Model-internal | [Paper](https://openaccess.thecvf.com/content/ICCV2025/html/Zhou_UniRes_Universal_Image_Restoration_for_Complex_Degradations_ICCV_2025_paper.html) | — |
+| SUPIR | CVPR 2024 | Semantic and perceptual condition | Generative restoration model | Open | [Paper](https://openaccess.thecvf.com/content/CVPR2024/html/Yu_Scaling_Up_to_Excellence_Practicing_Model_Scaling_for_Photo-Realistic_Image_CVPR_2024_paper.html) | [Code](https://github.com/Fanghua-Yu/SUPIR) |
+| DreamClear | NeurIPS 2024 | Real-world degradation and semantic condition | Generative restoration model | Open | [Paper](https://proceedings.neurips.cc/paper_files/paper/2024/hash/6452474601429509f3035dc81c233226-Abstract-Conference.html) | [Code](https://github.com/shallowdream204/DreamClear) |
 
 ## Section 5 — General restoration and editing controllers
 
-| Work and status | Controller | Execution | Feedback |
-|---|---|---|---|
-| RestoreAgent, NeurIPS 2024 | MLLM degradation and model planner | Ordered specialist-model calls | Source-defined sequence score and execution history |
-| 4KAgent, NeurIPS 2025 | VLM-IQA perception agent | Quality-driven mixture of experts | Recursive execution-reflection |
-| Q-Agent, preprint 2025 | Quality-driven chain-of-thought agent | Specialist restoration algorithms | Objective IQA-guided greedy decisions |
-| OPERA, preprint 2026 | RL-optimised planner | Jointly trained restoration tools | Final restoration quality |
-| DiTTo, preprint 2026 | Order-aware agent | Simulator-supported specialist tools | Degradation identification and action ordering |
-| Restore-R1, CVPR Findings 2026 | Lightweight visual actor-critic policy | Specialised restoration functions | Per-step DeQA-Score improvement |
-| PhotoAgent, ICML 2026 oral | Tree-search aesthetic planner | Multi-step editing actions | Learned aesthetic reward and visual feedback |
-| PhotoArtAgent, preprint 2025 | Language-model artist agents | Retouching parameters | Iterative reflection |
-| RetouchIQ, CVPR 2026 | RL-trained MLLM agent | Lightroom controls | Generalist retouching reward |
-| FAPE-IR, CVPR 2026 | Frozen MLLM planner | LoRA-MoE diffusion executor | Restoration objective across seven tasks |
-| RAR, CVPR 2026 boundary case | Learned latent controller | End-to-end latent iterations | Learned assessment without an external MLLM tool loop |
+| Work and status | Controller | Execution | Feedback | Paper | Code / project |
+|---|---|---|---|---|---|
+| RestoreAgent, NeurIPS 2024 | MLLM degradation and model planner | Ordered specialist-model calls | Sequence score and execution history | [Paper](https://proceedings.neurips.cc/paper_files/paper/2024/hash/c78f639424b8d89ceb4f2efbb4dfe4f4-Abstract.html) | [Project](https://haoyuchen.com/RestoreAgent) |
+| 4KAgent, NeurIPS 2025 | VLM-IQA perception agent | Quality-driven mixture of experts | Recursive execution-reflection | [Paper](https://proceedings.neurips.cc/paper_files/paper/2025/hash/f0075fe4e59652cf43148dcfab8d3c93-Abstract-Conference.html) | [Code](https://github.com/taco-group/4KAgent) |
+| Q-Agent, preprint 2025 | Quality-driven chain-of-thought agent | Specialist restoration algorithms | Objective IQA-guided greedy decisions | [Paper](https://arxiv.org/abs/2504.07148) | — |
+| OPERA, preprint 2026 | RL-optimised planner | Jointly trained restoration tools | Final restoration quality | [Paper](https://arxiv.org/abs/2605.22104) | [Code](https://github.com/xsyshuishui/Opera) |
+| DiTTo, preprint 2026 | Order-aware agent | Simulator-supported specialist tools | Degradation identification and action ordering | [Paper](https://arxiv.org/abs/2605.30915) | [Project](https://cmlab-korea.github.io/DiTTo/) |
+| Restore-R1, CVPR Findings 2026 | Lightweight visual actor-critic policy | Specialised restoration functions | Per-step DeQA-Score improvement | [Paper](https://openaccess.thecvf.com/content/CVPR2026F/html/Lu_Restore-R1_Efficient_Image_Restoration_Agents_via_Reinforcement_Learning_with_Multimodal_CVPRF_2026_paper.html) | — |
+| PhotoAgent, ICML 2026 oral | Tree-search aesthetic planner | Multi-step editing actions | Learned aesthetic reward and visual feedback | [Paper](https://arxiv.org/abs/2602.22809) | [Code](https://github.com/mdyao/PhotoAgent) |
+| PhotoArtAgent, preprint 2025 | Language-model artist agents | Retouching parameters | Iterative reflection | [Paper](https://arxiv.org/abs/2505.23130) | — |
+| RetouchIQ, CVPR 2026 | RL-trained MLLM agent | Lightroom controls | Generalist retouching reward | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Wu_RetouchIQ_MLLM_Agents_for_Instruction-Based_Image_Retouching_with_Generalist_Reward_CVPR_2026_paper.html) | — |
+| FAPE-IR, CVPR 2026 | Frozen MLLM planner | LoRA-MoE diffusion executor | Restoration objective across seven tasks | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Liu_FAPE-IR_Frequency-Aware_Planning_and_Execution_Framework_for_All-in-One_Image_Restoration_CVPR_2026_paper.html) | [Code](https://github.com/Programmergg/FAPE-IR) |
+| RAR, CVPR 2026 boundary case | Learned latent controller | End-to-end latent iterations | Learned assessment without an external MLLM tool loop | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Chen_Restore_Assess_Repeat_A_Unified_Framework_for_Iterative_Image_Restoration_CVPR_2026_paper.html) | [Code](https://github.com/saic-fi/RAR) |
 
 ## Section 5 — Application-specific controllers
 
-| Work and status | Controller | Execution | Feedback |
-|---|---|---|---|
-| JarvisIR, CVPR 2025 | Driving-oriented MLLM controller | Restoration modules before perception | Downstream perception utility |
-| AgentMRI, JIIM 2026 | Medical VLM agent | Three CycleGAN correction paths | Consensus-based corruption classification |
-| EpiAgent, CVPR 2026 | Observe-conceive planner | Inscription-restoration tools | Execute-reevaluate refinement |
-| SIMBA, preprint 2026 | Language-to-workflow agent | JSON-schema scientific tools | Input validation and execution response |
-| FMIRAgent, Research Square 2025 | Self-explaining MLLM assistant | Microscopy restoration algorithms | User or simulated iterative feedback |
-| RIR-Agent, ESWA 2026 | MLLM perception and LLM planner | Remote-sensing toolbox | Adaptation, rollback, or manual feedback |
+| Work and status | Controller | Execution | Feedback | Paper | Code / project |
+|---|---|---|---|---|---|
+| JarvisIR, CVPR 2025 | Driving-oriented MLLM controller | Restoration modules before perception | Downstream perception utility | [Paper](https://openaccess.thecvf.com/content/CVPR2025/html/Lin_JarvisIR_Elevating_Autonomous_Driving_Perception_with_Intelligent_Image_Restoration_CVPR_2025_paper.html) | [Code](https://github.com/LYL1015/JarvisIR) |
+| AgentMRI, JIIM 2026 | Medical VLM agent | Three CycleGAN correction paths | Consensus-based corruption classification | [Paper](https://doi.org/10.1007/s10278-025-01617-0) | — |
+| EpiAgent, CVPR 2026 | Observe-conceive planner | Inscription-restoration tools | Execute-reevaluate refinement | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Zhu_EpiAgent_An_Agent-Centric_System_for_Ancient_Inscription_Restoration_CVPR_2026_paper.html) | [Code](https://github.com/blackprotoss/EpiAgent) |
+| SIMBA, preprint 2026 | Language-to-workflow agent | JSON-schema scientific tools | Input validation and execution response | [Paper](https://doi.org/10.64898/2026.04.16.719005) | [Project](https://simba-website-indol.vercel.app/) |
+| FMIRAgent, Research Square 2025 | Self-explaining MLLM assistant | Microscopy restoration algorithms | User or simulated iterative feedback | [Paper](https://doi.org/10.21203/rs.3.rs-7116422/v1) | — |
+| RIR-Agent, ESWA 2026 | MLLM perception and LLM planner | Remote-sensing toolbox | Adaptation, rollback, or manual feedback | [Paper](https://doi.org/10.1016/j.eswa.2026.132495) | [Code](https://github.com/Arispur-311/RIR-Agent) |
 
 ## Section 6 — Memory and search systems
 
-| Work | Status | Search / control | Memory | Source-reported example |
-|---|---|---|---|---|
-| AgenticIR | ICLR 2025 | Depth-first rollback and rescheduling | Self-explored referenceable experience | MiO100 Group A: 21.04 dB PSNR and 0.6818 SSIM |
-| SEAR | Preprint 2026 | Intuitive executor and deliberate P-MCTS | Episodic state fingerprints | MiO100 Group A: 21.8042 dB PSNR and 0.6961 SSIM; Group B memory ablation: 8.15 versus 16.75 tool calls |
-| Causal-AgentIR | Preprint 2026 | Multi-agent causal reasoning | Self-evolving causal memory | All-in-one five-task average: 35.55 dB PSNR |
+| Work | Status | Search / control | Memory | Source-reported example | Paper | Code / project |
+|---|---|---|---|---|---|---|
+| AgenticIR | ICLR 2025 | Depth-first rollback and rescheduling | Self-explored referenceable experience | MiO100 Group A: 21.04 dB PSNR and 0.6818 SSIM | [Paper](https://proceedings.iclr.cc/paper_files/paper/2025/hash/921ac785fa9edc73cacaf2664f43d234-Abstract-Conference.html) | [Code](https://github.com/Kaiwen-Zhu/AgenticIR) |
+| SEAR | Preprint 2026 | Intuitive executor and deliberate P-MCTS | Episodic state fingerprints | MiO100 Group A: 21.8042 dB PSNR and 0.6961 SSIM; memory ablation: 8.15 versus 16.75 tool calls | [Paper](https://arxiv.org/abs/2606.28971) | — |
+| Causal-AgentIR | Preprint 2026 | Multi-agent causal reasoning | Self-evolving causal memory | Five-task average: 35.55 dB PSNR | [Paper](https://arxiv.org/abs/2607.21125) | — |
 
 ## Section 7 — Multi-agent systems
 
-| Work | Venue / year | Roles | Coordination | Source-reported example |
-|---|---|---|---|---|
-| MAIR | IJCV 2026 | Scheduler and seven experts | Sequential scheduling and candidate comparison | 35.42 s, 1.82 invocations, and paired real-world PSNR of 21.67 dB |
-| Hybrid Agents | CVPR 2026 | Fast, Slow, and Feedback | Request-dependent fast or slow execution and feedback | Random direct prompts use about 12% of full runtime; 0.08-0.13 s versus 0.75-1.05 s with the fast route disabled |
-| MAPGR | npj Heritage Science 2026 | Visual reasoning, prompt, and execution roles | Prompt-guided dual-stream residual diffusion | Evidence propagation with low-confidence abstention |
-| CLEAR | Remote Sensing 2026 | Fast and slow processing | Conditional restoration before detection | Overall mAP50 of 86.92%; 11.8 FPS assumes a 5% trigger rate |
+| Work | Venue / year | Roles | Coordination | Source-reported example | Paper | Code / project |
+|---|---|---|---|---|---|---|
+| MAIR | IJCV 2026 | Scheduler and seven experts | Sequential scheduling and candidate comparison | 35.42 s, 1.82 invocations, paired real-world PSNR 21.67 dB | [Paper](https://doi.org/10.1007/s11263-026-02792-5) | [Project](https://villa.jianzhang.tech/publication/200604/) |
+| Hybrid Agents | CVPR 2026 | Fast, Slow, and Feedback | Request-dependent fast or slow execution and feedback | About 12% runtime; 0.08-0.13 s versus 0.75-1.05 s with fast route disabled | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Hybrid_Agents_for_Image_Restoration_CVPR_2026_paper.html) | — |
+| MAPGR | npj Heritage Science 2026 | Visual reasoning, prompt, and execution roles | Prompt-guided dual-stream residual diffusion | Evidence propagation with low-confidence abstention | [Paper](https://doi.org/10.1038/s40494-026-02607-3) | [Code](https://github.com/tiskun101-oss/MAPGR) |
+| CLEAR | Remote Sensing 2026 | Fast and slow processing | Conditional restoration before detection | mAP50 86.92%; 11.8 FPS assumes a 5% trigger rate | [Paper](https://doi.org/10.3390/rs18081142) | — |
 
 ## Section 8 — Benchmark datasets
 
-| Dataset | Domain | Degradation types | Primary evaluation focus | Representative AIR works |
-|---|---|---|---|---|
-| MiO100-derived mixed protocols | Natural images | Composite noise, blur, haze, rain, and JPEG | Multi-degradation tool routing and backtracking | RAR, Restore-R1, AgenticIR, MAIR, Hybrid Agents, Causal-AgentIR |
-| DIV2K and high-resolution derivatives | High-resolution natural images | Downscaling, blur, and artefacts | Recursive tile-based super-resolution | RL-Restore, 4KAgent |
-| MiO100 | Natural images | Synthetic single or composite degradations | Degradation perception, restoration-order planning, and multi-tool coordination | AgenticIR, MAIR, 4KAgent, Restore-R1, DiTTo |
-| CDD-11 | Natural images | Composite low light, haze, rain, and snow | Composite-degradation perception and joint restoration | OneRestore |
-| MIT-Adobe FiveK | Aesthetic photography | Exposure, colour, and contrast | Continuous slider tuning and aesthetic preference | Distort-and-Recover |
-| Test100, Test1200, Rain100H, Rain100L | Natural rainy scenes | Rain streaks with varying density and patterns | Single-image deraining and robustness | Causal-AgentIR |
-| Snow100K, SRRS, CSD | Natural snowy scenes | Snow particles and streaks | Single-image desnowing | PaAgent, InstructIR, Causal-AgentIR |
-| RESIDE, SOTS | Indoor and outdoor natural images | Atmospheric haze | Single-image dehazing | PromptIR, Causal-AgentIR |
-| GoPro, HIDE, RealBlur | Dynamic and human-centric scenes | Camera, object, and human motion blur | Dynamic-scene and human-aware deblurring | Causal-AgentIR |
-| BSD68, Urban100, Kodak24, SIDD | Natural and urban images | Gaussian noise at multiple levels | Denoising across noise levels and structures | PixelRL, PaAgent, PromptIR, InstructIR, Causal-AgentIR |
-| LOL | Natural low-light scenes | Low illumination, often with noise | Illumination and detail restoration | Hybrid Agents, Causal-AgentIR |
-| fastMRI and related MRI protocols | Medical MRI | Study-specific 4×-6× k-space undersampling and corruption | Sampling optimisation, reconstruction, and correction | DUAL, intelligent-agent planning, KSRO, AgentMRI |
-| AAPM Low-Dose CT | Medical CT | Low-photon Poisson noise and streak artefacts | Iterative reconstruction parameter tuning | Shen et al., Patwari et al. |
-| nuScenes and HRSC-Robust | Autonomous driving and maritime remote sensing | Fog, rain, snow, low light, and other adverse conditions | Downstream driving and ship-detection performance | JarvisIR, CLEAR |
+| Dataset / protocol | Domain and degradation | Primary focus | Dataset source | Representative AIR papers | Official code / project by work |
+|---|---|---|---|---|---|
+| MiO100-derived mixed protocols | Natural images; composite noise, blur, haze, rain, and JPEG | Tool routing and backtracking | [MiO100 / AgenticIR](https://github.com/Kaiwen-Zhu/AgenticIR) | [RAR](https://openaccess.thecvf.com/content/CVPR2026/html/Chen_Restore_Assess_Repeat_A_Unified_Framework_for_Iterative_Image_Restoration_CVPR_2026_paper.html), [Restore-R1](https://openaccess.thecvf.com/content/CVPR2026F/html/Lu_Restore-R1_Efficient_Image_Restoration_Agents_via_Reinforcement_Learning_with_Multimodal_CVPRF_2026_paper.html), [AgenticIR](https://proceedings.iclr.cc/paper_files/paper/2025/hash/921ac785fa9edc73cacaf2664f43d234-Abstract-Conference.html), [MAIR](https://doi.org/10.1007/s11263-026-02792-5), [Hybrid Agents](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Hybrid_Agents_for_Image_Restoration_CVPR_2026_paper.html), [Causal-AgentIR](https://arxiv.org/abs/2607.21125) | [RAR code](https://github.com/saic-fi/RAR), Restore-R1: not released, [AgenticIR code](https://github.com/Kaiwen-Zhu/AgenticIR), [MAIR project](https://villa.jianzhang.tech/publication/200604/), Hybrid Agents: not released, Causal-AgentIR: not released |
+| DIV2K and high-resolution derivatives | High-resolution natural images; downscaling, blur, artefacts | Recursive tile-based super-resolution | [DIV2K paper](https://doi.org/10.1109/CVPRW.2017.150) | [RL-Restore](https://openaccess.thecvf.com/content_cvpr_2018/html/Yu_Crafting_a_Toolchain_CVPR_2018_paper.html), [4KAgent](https://proceedings.neurips.cc/paper_files/paper/2025/hash/f0075fe4e59652cf43148dcfab8d3c93-Abstract-Conference.html) | [RL-Restore code](https://github.com/yuke93/RL-Restore), [4KAgent code](https://github.com/taco-group/4KAgent) |
+| MiO100 | Natural images; single and composite degradations | Perception, order planning, multi-tool coordination | [AgenticIR paper and dataset](https://github.com/Kaiwen-Zhu/AgenticIR) | [AgenticIR](https://proceedings.iclr.cc/paper_files/paper/2025/hash/921ac785fa9edc73cacaf2664f43d234-Abstract-Conference.html), [MAIR](https://doi.org/10.1007/s11263-026-02792-5), [4KAgent](https://proceedings.neurips.cc/paper_files/paper/2025/hash/f0075fe4e59652cf43148dcfab8d3c93-Abstract-Conference.html), [Restore-R1](https://openaccess.thecvf.com/content/CVPR2026F/html/Lu_Restore-R1_Efficient_Image_Restoration_Agents_via_Reinforcement_Learning_with_Multimodal_CVPRF_2026_paper.html), [DiTTo](https://arxiv.org/abs/2605.30915) | [AgenticIR code](https://github.com/Kaiwen-Zhu/AgenticIR), [MAIR project](https://villa.jianzhang.tech/publication/200604/), [4KAgent code](https://github.com/taco-group/4KAgent), Restore-R1: not released, [DiTTo project](https://cmlab-korea.github.io/DiTTo/) |
+| CDD-11 | Natural images; low light, haze, rain, snow | Composite-degradation restoration | [OneRestore paper](https://arxiv.org/abs/2407.04621) | [OneRestore](https://arxiv.org/abs/2407.04621) | [OneRestore code](https://github.com/gy65896/OneRestore) |
+| MIT-Adobe FiveK | Aesthetic photography; exposure, colour, contrast | Continuous tuning and aesthetic preference | [Dataset paper](https://doi.org/10.1109/CVPR.2011.5995413) | [Distort-and-Recover](https://openaccess.thecvf.com/content_cvpr_2018/html/Park_Distort-and-Recover_Color_Enhancement_CVPR_2018_paper.html) | Distort-and-Recover: not released |
+| Test100, Test1200, Rain100H, Rain100L | Natural rainy scenes | Deraining robustness | [Test100, Rain100H, Rain100L / JORDER](https://openaccess.thecvf.com/content_cvpr_2017/html/Yang_Deep_Joint_Rain_CVPR_2017_paper.html), [Test1200 / DID-MDN](https://arxiv.org/abs/1802.07412) | [Causal-AgentIR](https://arxiv.org/abs/2607.21125) | Causal-AgentIR: not released |
+| Snow100K, SRRS, CSD | Natural snowy scenes | Desnowing | [Snow100K source paper](https://arxiv.org/abs/1708.04512) | [PaAgent](https://arxiv.org/abs/2603.17055), [InstructIR](https://arxiv.org/abs/2401.16468), [Causal-AgentIR](https://arxiv.org/abs/2607.21125) | [PaAgent code, release announced](https://github.com/WYJGR/PaAgent), [InstructIR code](https://github.com/mv-lab/InstructIR), Causal-AgentIR: not released |
+| RESIDE, SOTS | Indoor and outdoor scenes; haze | Dehazing | [RESIDE source paper](https://doi.org/10.1109/TIP.2018.2867951) | [PromptIR](https://proceedings.neurips.cc/paper_files/paper/2023/hash/e187897ed7780a8c3f50a8fc8997e6b1-Abstract-Conference.html), [Causal-AgentIR](https://arxiv.org/abs/2607.21125) | [PromptIR code](https://github.com/va1shn9v/PromptIR), Causal-AgentIR: not released |
+| GoPro, HIDE, RealBlur | Dynamic scenes; motion blur | Deblurring | [GoPro](https://doi.org/10.1109/CVPR.2017.35), [RealBlur](https://doi.org/10.1007/978-3-030-58595-2_12) | [InstructIR](https://arxiv.org/abs/2401.16468), [Causal-AgentIR](https://arxiv.org/abs/2607.21125) | [InstructIR code](https://github.com/mv-lab/InstructIR), Causal-AgentIR: not released |
+| BSD68, Urban100, Kodak24, SIDD | Natural and urban images; Gaussian noise | Denoising | [SIDD](https://openaccess.thecvf.com/content_cvpr_2018/html/Abdelhamed_A_High-Quality_Denoising_CVPR_2018_paper.html) | [PixelRL](https://doi.org/10.1609/aaai.v33i01.33013598), [PaAgent](https://arxiv.org/abs/2603.17055), [PromptIR](https://proceedings.neurips.cc/paper_files/paper/2023/hash/e187897ed7780a8c3f50a8fc8997e6b1-Abstract-Conference.html), [InstructIR](https://arxiv.org/abs/2401.16468), [Causal-AgentIR](https://arxiv.org/abs/2607.21125) | [PixelRL code](https://github.com/rfuruta/pixelRL), [PaAgent code, release announced](https://github.com/WYJGR/PaAgent), [PromptIR code](https://github.com/va1shn9v/PromptIR), [InstructIR code](https://github.com/mv-lab/InstructIR), Causal-AgentIR: not released |
+| LOL | Natural low-light scenes | Illumination and detail restoration | [Dataset paper](https://bmva-archive.org.uk/bmvc/2018/contents/papers/0451.pdf) | [Hybrid Agents](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Hybrid_Agents_for_Image_Restoration_CVPR_2026_paper.html), [Causal-AgentIR](https://arxiv.org/abs/2607.21125) | Hybrid Agents: not released, Causal-AgentIR: not released |
+| fastMRI and related protocols | Medical MRI; 4×-6× undersampling and corruption | Sampling, reconstruction, correction | [fastMRI](https://doi.org/10.1148/ryai.2020190007) | [DUAL](https://doi.org/10.1016/j.neucom.2023.127067), [Intelligent Agent Planning](https://doi.org/10.1109/EMBC53108.2024.10782629), [KSRO](https://doi.org/10.1016/j.neucom.2025.130116), [AgentMRI](https://doi.org/10.1007/s10278-025-01617-0) | [DUAL code](https://github.com/yanweipang/mri), Intelligent Agent Planning: not released, [KSRO code](https://github.com/Ruru-Xu/KSRO), AgentMRI: not released |
+| AAPM Low-Dose CT | Medical CT; low-photon noise and streak artefacts | Reconstruction parameter tuning | [Dataset](https://doi.org/10.7937/9NPB-2637) | [CT-DRL](https://doi.org/10.1109/TMI.2018.2823679), [JBF optimisation](https://arxiv.org/abs/2007.04768) | [CT-DRL code](https://github.com/heixscy88/TMI_parameter_tuning), JBF optimisation: not released |
+| nuScenes and HRSC-Robust | Driving and maritime remote sensing; adverse conditions | Downstream perception and detection | [nuScenes](https://openaccess.thecvf.com/content_CVPR_2020/html/Caesar_nuScenes_A_Multimodal_Dataset_for_Autonomous_Driving_CVPR_2020_paper.html) | [JarvisIR](https://openaccess.thecvf.com/content/CVPR2025/html/Lin_JarvisIR_Elevating_Autonomous_Driving_Perception_with_Intelligent_Image_Restoration_CVPR_2025_paper.html), [CLEAR](https://doi.org/10.3390/rs18081142) | [JarvisIR code](https://github.com/LYL1015/JarvisIR), CLEAR: not released |
+
+### Dataset, metric, and provenance source records used in Section 8
+
+| Work | Venue | Year | Paper / record | Code / dataset / project |
+|---|---|---:|---|---|
+| Learning Photographic Global Tonal Adjustment with a Database of Input/Output Image Pairs | CVPR | 2011 | [Paper](https://doi.org/10.1109/CVPR.2011.5995413) | [MIT-Adobe FiveK](https://people.csail.mit.edu/vladb/photoadjust/) |
+| NTIRE 2017 Challenge on Single Image Super-Resolution: Dataset and Study | CVPR Workshops | 2017 | [Paper](https://doi.org/10.1109/CVPRW.2017.150) | [DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/) |
+| Deep Multi-Scale Convolutional Neural Network for Dynamic Scene Deblurring | CVPR | 2017 | [Paper](https://doi.org/10.1109/CVPR.2017.35) | [GoPro](https://github.com/SeungjunNah/DeepDeblur_release) |
+| A High-Quality Denoising Dataset for Smartphone Cameras | CVPR | 2018 | [Paper](https://openaccess.thecvf.com/content_cvpr_2018/html/Abdelhamed_A_High-Quality_Denoising_CVPR_2018_paper.html) | [SIDD](https://abdokamel.github.io/sidd/) |
+| Deep Retinex Decomposition for Low-Light Enhancement | BMVC | 2018 | [Paper](https://bmva-archive.org.uk/bmvc/2018/contents/papers/0451.pdf) | [LOL / RetinexNet](https://github.com/weichen582/RetinexNet) |
+| Low Dose CT Image and Projection Data | The Cancer Imaging Archive | 2020 | [Record](https://doi.org/10.7937/9NPB-2637) | [Dataset](https://www.cancerimagingarchive.net/collection/ldct-and-projection-data/) |
+| fastMRI: A Publicly Available Raw k-Space and DICOM Dataset of Knee Images for Accelerated MR Image Reconstruction Using Machine Learning | Radiology: AI | 2020 | [Paper](https://doi.org/10.1148/ryai.2020190007) | [fastMRI](https://fastmri.med.nyu.edu/) |
+| nuScenes: A Multimodal Dataset for Autonomous Driving | CVPR | 2020 | [Paper](https://openaccess.thecvf.com/content_CVPR_2020/html/Caesar_nuScenes_A_Multimodal_Dataset_for_Autonomous_Driving_CVPR_2020_paper.html) | [nuScenes](https://www.nuscenes.org/) |
+| Real-World Blur Dataset for Learning and Benchmarking Deblurring Algorithms | ECCV | 2020 | [Paper](https://doi.org/10.1007/978-3-030-58595-2_12) | [RealBlur](https://cg.postech.ac.kr/research/realblur/) |
+| Deep Joint Rain Detection and Removal from a Single Image | CVPR | 2017 | [Paper](https://openaccess.thecvf.com/content_cvpr_2017/html/Yang_Deep_Joint_Rain_CVPR_2017_paper.html) | Rain100H / Rain100L |
+| Density-Aware Single Image De-Raining Using a Multi-Stream Dense Network | CVPR | 2018 | [Paper](https://arxiv.org/abs/1802.07412) | [DID-MDN / Test1200](https://github.com/hezhangsprinter/DID-MDN) |
+| DesnowNet: Context-Aware Deep Network for Snow Removal | IEEE TIP | 2018 | [Paper](https://doi.org/10.1109/TIP.2018.2806202) | Snow100K |
+| Benchmarking Single-Image Dehazing and Beyond | IEEE TIP | 2019 | [Paper](https://doi.org/10.1109/TIP.2018.2867951) | RESIDE / SOTS |
+| Image quality assessment: from error visibility to structural similarity | IEEE TIP | 2004 | [Paper](https://doi.org/10.1109/TIP.2003.819861) | — |
+| No-Reference Image Quality Assessment in the Spatial Domain | IEEE TIP | 2012 | [Paper](https://doi.org/10.1109/TIP.2012.2214050) | — |
+| The Unreasonable Effectiveness of Deep Features as a Perceptual Metric | CVPR | 2018 | [Paper](https://doi.org/10.1109/CVPR.2018.00068) | [Code](https://github.com/richzhang/PerceptualSimilarity) |
+| MUSIQ: Multi-Scale Image Quality Transformer | ICCV | 2021 | [Paper](https://openaccess.thecvf.com/content/ICCV2021/html/Ke_MUSIQ_Multi-Scale_Image_Quality_Transformer_ICCV_2021_paper.html) | — |
+| Image Quality Assessment: Unifying Structure and Texture Similarity | IEEE TPAMI | 2022 | [Paper](https://doi.org/10.1109/TPAMI.2020.3045810) | [Code](https://github.com/dingkeyan93/DISTS) |
+| MANIQA: Multi-Dimension Attention Network for No-Reference Image Quality Assessment | CVPR Workshops | 2022 | [Paper](https://openaccess.thecvf.com/content/CVPR2022W/NTIRE/html/Yang_MANIQA_Multi-Dimension_Attention_Network_for_No-Reference_Image_Quality_Assessment_CVPRW_2022_paper.html) | [Code](https://github.com/IIGROUP/MANIQA) |
+| Exploring CLIP for Assessing the Look and Feel of Images | AAAI | 2023 | [Paper](https://doi.org/10.1609/aaai.v37i2.25353) | [Code](https://github.com/IceClear/CLIPIQA) |
+| C2PA Technical Specification, Version 2.4 | C2PA | 2026 | [Specification](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html) | — |
 
 ## Section 8 — Representative quantitative results
 
-| Work | Dataset / setting | Primary metric | Result |
+| Work | Dataset / setting | Metric | Result | Paper | Code / project |
+|---|---|---|---|---|---|
+| RL-Restore | DIV2K, mild unseen | PSNR / SSIM | 28.04 dB / 0.6498 | [Paper](https://openaccess.thecvf.com/content_cvpr_2018/html/Yu_Crafting_a_Toolchain_CVPR_2018_paper.html) | [Code](https://github.com/yuke93/RL-Restore) |
+| RL-Restore | DIV2K, moderate | PSNR / SSIM | 26.45 dB / 0.5587 | [Paper](https://openaccess.thecvf.com/content_cvpr_2018/html/Yu_Crafting_a_Toolchain_CVPR_2018_paper.html) | [Code](https://github.com/yuke93/RL-Restore) |
+| RL-Restore | DIV2K, severe unseen | PSNR / SSIM | 25.20 dB / 0.4777 | [Paper](https://openaccess.thecvf.com/content_cvpr_2018/html/Yu_Crafting_a_Toolchain_CVPR_2018_paper.html) | [Code](https://github.com/yuke93/RL-Restore) |
+| PixelRL | BSD68, σ = 15 | PSNR | 31.49 dB | [Paper](https://doi.org/10.1609/aaai.v33i01.33013598) | [Code](https://github.com/rfuruta/pixelRL) |
+| PixelRL | BSD68, σ = 25 | PSNR | 28.94 dB | [Paper](https://doi.org/10.1609/aaai.v33i01.33013598) | [Code](https://github.com/rfuruta/pixelRL) |
+| PixelRL | BSD68, σ = 50 | PSNR | 25.95 dB | [Paper](https://doi.org/10.1609/aaai.v33i01.33013598) | [Code](https://github.com/rfuruta/pixelRL) |
+| Path-Restore | Darmstadt Noise Dataset, Path-Restore-Ext | PSNR / SSIM | 39.72 dB / 0.9591 | [Paper](https://doi.org/10.1109/TPAMI.2021.3080863) | [Code](https://github.com/yuke93/Path-Restore) |
+| Path-Restore | SIDD | PSNR / SSIM | 38.21 dB / 0.946 | [Paper](https://doi.org/10.1109/TPAMI.2021.3080863) | [Code](https://github.com/yuke93/Path-Restore) |
+| Distort-and-Recover | MIT-Adobe 5K expert-C / RANDOM 250 | Mean L² error / SSIM | 10.99 / 0.905 | [Paper](https://openaccess.thecvf.com/content_cvpr_2018/html/Park_Distort-and-Recover_Color_Enhancement_CVPR_2018_paper.html) | Not released |
+| Distort-and-Recover | MIT-Adobe 5K expert-C / distort-and-recover scheme | Mean L² error / SSIM | 12.15 / 0.910 | [Paper](https://openaccess.thecvf.com/content_cvpr_2018/html/Park_Distort-and-Recover_Color_Enhancement_CVPR_2018_paper.html) | Not released |
+| PaAgent | CSD | PSNR / SSIM | 37.95 dB / 0.98 | [Paper](https://arxiv.org/abs/2603.17055) | [Code, release announced](https://github.com/WYJGR/PaAgent) |
+| PaAgent | BSD68, σ = 15 | PSNR / SSIM | 34.39 dB / 0.94 | [Paper](https://arxiv.org/abs/2603.17055) | [Code, release announced](https://github.com/WYJGR/PaAgent) |
+| PaAgent | BSD68, σ = 25 | PSNR / SSIM | 29.36 dB / 0.85 | [Paper](https://arxiv.org/abs/2603.17055) | [Code, release announced](https://github.com/WYJGR/PaAgent) |
+| PaAgent | BSD68, σ = 50 | PSNR / SSIM | 27.03 dB / 0.79 | [Paper](https://arxiv.org/abs/2603.17055) | [Code, release announced](https://github.com/WYJGR/PaAgent) |
+| AirNet | Five-condition average: BSD68 (σ = 15, 25, 50), SOTS, Rain100L | PSNR / SSIM | 31.20 dB / 0.910 | [Paper](https://openaccess.thecvf.com/content/CVPR2022/html/Li_All-in-One_Image_Restoration_for_Unknown_Corruption_CVPR_2022_paper.html) | [Code](https://github.com/XLearning-SCU/2022-CVPR-AirNet) |
+| PromptIR | Five-condition average: BSD68 (σ = 15, 25, 50), SOTS, Rain100L | PSNR / SSIM | 32.06 dB / 0.913 | [Paper](https://proceedings.neurips.cc/paper_files/paper/2023/hash/e187897ed7780a8c3f50a8fc8997e6b1-Abstract-Conference.html) | [Code](https://github.com/va1shn9v/PromptIR) |
+| InstructIR | BSD68, Rain100L, SOTS, GoPro, LOL | PSNR / SSIM | 29.55 dB / 0.907 | [Paper](https://arxiv.org/abs/2401.16468) | [Code](https://github.com/mv-lab/InstructIR) |
+| OneRestore | CDD-11 | PSNR / SSIM | 28.72 dB / 0.8821 | [Paper](https://arxiv.org/abs/2407.04621) | [Code](https://github.com/gy65896/OneRestore) |
+| RAR | MiO100, 2 degradations, 8 combinations | PSNR / SSIM / LPIPS | 20.46 dB / 0.7144 / 0.1299 | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Chen_Restore_Assess_Repeat_A_Unified_Framework_for_Iterative_Image_Restoration_CVPR_2026_paper.html) | [Code](https://github.com/saic-fi/RAR) |
+| RAR | MiO100, 2 degradations, 4 combinations | PSNR / SSIM / LPIPS | 21.04 dB / 0.7326 / 0.1269 | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Chen_Restore_Assess_Repeat_A_Unified_Framework_for_Iterative_Image_Restoration_CVPR_2026_paper.html) | [Code](https://github.com/saic-fi/RAR) |
+| RAR | MiO100, 3 degradations, 4 combinations | PSNR / SSIM / LPIPS | 19.33 dB / 0.6579 / 0.1489 | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Chen_Restore_Assess_Repeat_A_Unified_Framework_for_Iterative_Image_Restoration_CVPR_2026_paper.html) | [Code](https://github.com/saic-fi/RAR) |
+| Restore-R1 | Setting I, 5 two-degradation combinations | PSNR / SSIM / LPIPS; MANIQA / CLIP-IQA / MUSIQ / DeQA | 19.513 dB / 0.647 / 0.365; 0.349 / 0.525 / 63.003 / 3.657 | [Paper](https://openaccess.thecvf.com/content/CVPR2026F/html/Lu_Restore-R1_Efficient_Image_Restoration_Agents_via_Reinforcement_Learning_with_Multimodal_CVPRF_2026_paper.html) | Not released |
+| Restore-R1 | Setting II, 3 two-degradation combinations | PSNR / SSIM / LPIPS; MANIQA / CLIP-IQA / MUSIQ / DeQA | 17.958 dB / 0.636 / 0.385; 0.343 / 0.530 / 63.344 / 3.599 | [Paper](https://openaccess.thecvf.com/content/CVPR2026F/html/Lu_Restore-R1_Efficient_Image_Restoration_Agents_via_Reinforcement_Learning_with_Multimodal_CVPRF_2026_paper.html) | Not released |
+| Restore-R1 | Setting III, 4 three-degradation combinations | PSNR / SSIM / LPIPS; MANIQA / CLIP-IQA / MUSIQ / DeQA | 17.650 dB / 0.563 / 0.475; 0.295 / 0.473 / 57.756 / 3.247 | [Paper](https://openaccess.thecvf.com/content/CVPR2026F/html/Lu_Restore-R1_Efficient_Image_Restoration_Agents_via_Reinforcement_Learning_with_Multimodal_CVPRF_2026_paper.html) | Not released |
+| Restore-R1 | Setting IV, 3 combinations of 4 or 5 degradations | PSNR / SSIM / LPIPS; MANIQA / CLIP-IQA / MUSIQ / DeQA | 16.180 dB / 0.473 / 0.564; 0.233 / 0.389 / 49.810 / 2.864 | [Paper](https://openaccess.thecvf.com/content/CVPR2026F/html/Lu_Restore-R1_Efficient_Image_Restoration_Agents_via_Reinforcement_Learning_with_Multimodal_CVPRF_2026_paper.html) | Not released |
+| AgenticIR | MiO100, 2 degradations, 8 combinations | PSNR / SSIM / LPIPS | 21.04 / 0.6818 / 0.3148 | [Paper](https://proceedings.iclr.cc/paper_files/paper/2025/hash/921ac785fa9edc73cacaf2664f43d234-Abstract-Conference.html) | [Code](https://github.com/Kaiwen-Zhu/AgenticIR) |
+| AgenticIR | MiO100, 2 degradations, 4 combinations | PSNR / SSIM / LPIPS | 20.55 / 0.7009 / 0.3072 | [Paper](https://proceedings.iclr.cc/paper_files/paper/2025/hash/921ac785fa9edc73cacaf2664f43d234-Abstract-Conference.html) | [Code](https://github.com/Kaiwen-Zhu/AgenticIR) |
+| AgenticIR | MiO100, 3 degradations, 4 combinations | PSNR / SSIM / LPIPS | 18.82 / 0.5474 / 0.4493 | [Paper](https://proceedings.iclr.cc/paper_files/paper/2025/hash/921ac785fa9edc73cacaf2664f43d234-Abstract-Conference.html) | [Code](https://github.com/Kaiwen-Zhu/AgenticIR) |
+| MAIR | MiO100, 2 degradations, 8 combinations | PSNR / SSIM / LPIPS | 21.02 / 0.6715 / 0.2963 | [Paper](https://doi.org/10.1007/s11263-026-02792-5) | [Project](https://villa.jianzhang.tech/publication/200604/) |
+| MAIR | MiO100, 2 degradations, 4 combinations | PSNR / SSIM / LPIPS | 20.92 / 0.7004 / 0.2788 | [Paper](https://doi.org/10.1007/s11263-026-02792-5) | [Project](https://villa.jianzhang.tech/publication/200604/) |
+| MAIR | MiO100, 3 degradations, 4 combinations | PSNR / SSIM / LPIPS | 19.42 / 0.5544 / 0.4142 | [Paper](https://doi.org/10.1007/s11263-026-02792-5) | [Project](https://villa.jianzhang.tech/publication/200604/) |
+| Hybrid Agents | DF2K, Gaussian noise; fast route on versus off | PSNR / SSIM | 30.25 / 0.867 versus 30.63 / 0.874 | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Hybrid_Agents_for_Image_Restoration_CVPR_2026_paper.html) | Not released |
+| Hybrid Agents | Rain100H; fast route on versus off | PSNR / SSIM | 30.04 / 0.893 versus 30.03 / 0.893 | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Hybrid_Agents_for_Image_Restoration_CVPR_2026_paper.html) | Not released |
+| Hybrid Agents | RESIDE-6K; fast route on versus off | PSNR / SSIM | 29.92 / 0.960 versus 29.92 / 0.960 | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Hybrid_Agents_for_Image_Restoration_CVPR_2026_paper.html) | Not released |
+| Hybrid Agents | LOL; fast route on versus off | PSNR / SSIM | 22.60 / 0.825 versus 22.61 / 0.828 | [Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Hybrid_Agents_for_Image_Restoration_CVPR_2026_paper.html) | Not released |
+| Causal-AgentIR | Five-task average: Test100, Snow100K, SOTS-Indoor, GoPro, CBSD68 | PSNR / SSIM | 35.55 dB / 0.964 | [Paper](https://arxiv.org/abs/2607.21125) | Not released |
+
+## Section 8 — Evaluation metrics and reproducibility
+
+| Dimension | Examples | Required context | Sources / implementations |
 |---|---|---|---|
-| RL-Restore | DIV2K, mild unseen degradation | PSNR / SSIM | 28.04 dB / 0.6498 |
-| RL-Restore | DIV2K, moderate degradation | PSNR / SSIM | 26.45 dB / 0.5587 |
-| RL-Restore | DIV2K, severe unseen degradation | PSNR / SSIM | 25.20 dB / 0.4777 |
-| PixelRL | BSD68, σ = 15 | PSNR | 31.49 dB |
-| PixelRL | BSD68, σ = 25 | PSNR | 28.94 dB |
-| PixelRL | BSD68, σ = 50 | PSNR | 25.95 dB |
-| Path-Restore | Darmstadt Noise Dataset, Path-Restore-Ext | PSNR / SSIM | 39.72 dB / 0.9591 |
-| Path-Restore | SIDD | PSNR / SSIM | 38.21 dB / 0.946 |
-| Distort-and-Recover | MIT-Adobe FiveK expert C, RANDOM 250 | Mean L² error / SSIM | 10.99 / 0.905 |
-| Distort-and-Recover | MIT-Adobe FiveK expert C, distort-and-recover scheme | Mean L² error / SSIM | 12.15 / 0.910 |
-| PaAgent | CSD | PSNR / SSIM | 37.95 dB / 0.98 |
-| PaAgent | BSD68, σ = 15 | PSNR / SSIM | 34.39 dB / 0.94 |
-| PaAgent | BSD68, σ = 25 | PSNR / SSIM | 29.36 dB / 0.85 |
-| PaAgent | BSD68, σ = 50 | PSNR / SSIM | 27.03 dB / 0.79 |
-| AirNet | Five-condition average: BSD68 σ = 15, 25, 50; SOTS; Rain100L | PSNR / SSIM | 31.20 dB / 0.910 |
-| PromptIR | Five-condition average: BSD68 σ = 15, 25, 50; SOTS; Rain100L | PSNR / SSIM | 32.06 dB / 0.913 |
-| InstructIR | BSD68, Rain100L, SOTS, GoPro, LOL | PSNR / SSIM | 29.55 dB / 0.907 |
-| OneRestore | CDD-11 | PSNR / SSIM | 28.72 dB / 0.8821 |
-| RAR | MiO100, two degradations, eight combinations | PSNR / SSIM / LPIPS | 20.46 dB / 0.7144 / 0.1299 |
-| RAR | MiO100, two degradations, four combinations | PSNR / SSIM / LPIPS | 21.04 dB / 0.7326 / 0.1269 |
-| RAR | MiO100, three degradations, four combinations | PSNR / SSIM / LPIPS | 19.33 dB / 0.6579 / 0.1489 |
-| Restore-R1 | Setting I, five two-degradation combinations | PSNR / SSIM / LPIPS; MANIQA / CLIP-IQA / MUSIQ / DeQA | 19.513 dB / 0.647 / 0.365; 0.349 / 0.525 / 63.003 / 3.657 |
-| Restore-R1 | Setting II, three two-degradation combinations | PSNR / SSIM / LPIPS; MANIQA / CLIP-IQA / MUSIQ / DeQA | 17.958 dB / 0.636 / 0.385; 0.343 / 0.530 / 63.344 / 3.599 |
-| Restore-R1 | Setting III, four three-degradation combinations | PSNR / SSIM / LPIPS; MANIQA / CLIP-IQA / MUSIQ / DeQA | 17.650 dB / 0.563 / 0.475; 0.295 / 0.473 / 57.756 / 3.247 |
-| Restore-R1 | Setting IV, three combinations of four or five degradations | PSNR / SSIM / LPIPS; MANIQA / CLIP-IQA / MUSIQ / DeQA | 16.180 dB / 0.473 / 0.564; 0.233 / 0.389 / 49.810 / 2.864 |
-| AgenticIR | MiO100, two degradations, eight combinations | PSNR / SSIM / LPIPS | 21.04 dB / 0.6818 / 0.3148 |
-| AgenticIR | MiO100, two degradations, four combinations | PSNR / SSIM / LPIPS | 20.55 dB / 0.7009 / 0.3072 |
-| AgenticIR | MiO100, three degradations, four combinations | PSNR / SSIM / LPIPS | 18.82 dB / 0.5474 / 0.4493 |
-| MAIR | MiO100, two degradations, eight combinations | PSNR / SSIM / LPIPS | 21.02 dB / 0.6715 / 0.2963 |
-| MAIR | MiO100, two degradations, four combinations | PSNR / SSIM / LPIPS | 20.92 dB / 0.7004 / 0.2788 |
-| MAIR | MiO100, three degradations, four combinations | PSNR / SSIM / LPIPS | 19.42 dB / 0.5544 / 0.4142 |
-| Hybrid Agents | DF2K, Gaussian noise, fast route enabled versus disabled | PSNR / SSIM | 30.25 / 0.867 versus 30.63 / 0.874 |
-| Hybrid Agents | Rain100H, fast route enabled versus disabled | PSNR / SSIM | 30.04 / 0.893 versus 30.03 / 0.893 |
-| Hybrid Agents | RESIDE-6K, fast route enabled versus disabled | PSNR / SSIM | 29.92 / 0.960 versus 29.92 / 0.960 |
-| Hybrid Agents | LOL, fast route enabled versus disabled | PSNR / SSIM | 22.60 / 0.825 versus 22.61 / 0.828 |
-| Causal-AgentIR | Five-task average: Test100, Snow100K, SOTS-Indoor, GoPro, CBSD68 | PSNR / SSIM | 35.55 dB / 0.964 |
+| Fidelity | PSNR, SSIM | Dataset, split, degradation, reference availability | [SSIM paper](https://doi.org/10.1109/TIP.2003.819861) |
+| Perception | LPIPS, DISTS, MUSIQ, MANIQA, CLIP-IQA | Direction, implementation, aggregation | [LPIPS paper/code](https://github.com/richzhang/PerceptualSimilarity), [DISTS paper/code](https://github.com/dingkeyan93/DISTS), [MUSIQ paper](https://openaccess.thecvf.com/content/ICCV2021/html/Ke_MUSIQ_Multi-Scale_Image_Quality_Transformer_ICCV_2021_paper.html), [MANIQA paper/code](https://github.com/IIGROUP/MANIQA), [CLIP-IQA paper/code](https://github.com/IceClear/CLIPIQA) |
+| Utility | mAP, mIoU, OCR or scientific error | Downstream model and degraded-input baseline | [JarvisIR paper/code](https://github.com/LYL1015/JarvisIR), [CLEAR paper](https://doi.org/10.3390/rs18081142) |
+| Execution | Calls, steps, retries, failures | Tool registry, stopping rule, budget | [RestoreAgent project](https://haoyuchen.com/RestoreAgent), [4KAgent paper/code](https://github.com/taco-group/4KAgent) |
+| Efficiency | Latency, VRAM, tokens, cost | Hardware, model or API version, concurrency | [Hybrid Agents paper](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Hybrid_Agents_for_Image_Restoration_CVPR_2026_paper.html) |
+| Safety | Worsening rate, hallucination, provenance | Failure definition and audit trail | [C2PA 2.4](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html) |
 
-## Section 8 — Evaluation and reproducibility
-
-### Minimum metric families
-
-| Dimension | Examples | Required context |
-|---|---|---|
-| Fidelity | PSNR, SSIM | Dataset, split, degradation, reference availability |
-| Perception | LPIPS, DISTS, no-reference IQA | Metric direction, implementation, aggregation |
-| Utility | mAP, mIoU, OCR or scientific error | Downstream model and degraded-input baseline |
-| Execution | Calls, steps, retries, failures | Tool registry, stopping rule, budget |
-| Efficiency | Latency, VRAM, tokens, cost | Hardware, model or API version, concurrency |
-| Safety | Worsening rate, hallucination, provenance | Failure definition and audit trail |
-
-### Protocol information required for reproducible agent evaluation
-
-| Component | What to disclose | Why it matters | Typical failure |
+| Protocol component | What to disclose | Typical failure | Evidence examples |
 |---|---|---|---|
-| Input generation | Source images, degradation order and severity, random seed | Determines difficulty and ordering ambiguity | Different mixtures reported under the same benchmark name |
-| Controller | Model and version, prompt, decoding, memory initialisation | Changes diagnosis and planning behaviour | Silent model or API updates |
-| Tools | Exact checkpoints, parameters, permitted order | Defines the executable action space | Comparing systems with unequal tool strength |
-| Feedback | Metric implementation, reference access, stopping rule | Determines retry and termination | Test-time access to unavailable ground truth |
-| Budget | Calls, tokens, time, hardware, parallelism | Required for efficiency claims | Reporting tool time while omitting controller time |
-| Statistics | Repetitions, variance, confidence intervals, failure cases | Agent decisions can be stochastic | Single-run point estimates |
+| Input generation | Source images, degradation order and severity, random seed | Different mixtures reported under the same benchmark name | [RAR paper/code](https://github.com/saic-fi/RAR), [Restore-R1 paper](https://openaccess.thecvf.com/content/CVPR2026F/html/Lu_Restore-R1_Efficient_Image_Restoration_Agents_via_Reinforcement_Learning_with_Multimodal_CVPRF_2026_paper.html) |
+| Controller | Model and version, prompt, decoding, memory initialisation | Silent model or API updates | [RestoreAgent project](https://haoyuchen.com/RestoreAgent) |
+| Tools | Exact checkpoints, parameters, permitted order | Comparing systems with unequal tool strength | [AgenticIR paper/code](https://github.com/Kaiwen-Zhu/AgenticIR) |
+| Feedback | Metric implementation, reference access, stopping rule | Test-time access to unavailable ground truth | [4KAgent paper/code](https://github.com/taco-group/4KAgent), [Restore-R1 paper](https://openaccess.thecvf.com/content/CVPR2026F/html/Lu_Restore-R1_Efficient_Image_Restoration_Agents_via_Reinforcement_Learning_with_Multimodal_CVPRF_2026_paper.html) |
+| Budget | Calls, tokens, time, hardware, parallelism | Reporting tool time while omitting controller time | [Hybrid Agents paper](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Hybrid_Agents_for_Image_Restoration_CVPR_2026_paper.html) |
+| Statistics | Repetitions, variance, confidence intervals, failure cases | Single-run point estimates | [Imaging-101 paper/code](https://github.com/AI4ImagingLab/imaging-101-release), [Computational Imaging benchmark](https://arxiv.org/abs/2607.07189) |
