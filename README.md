@@ -1,6 +1,6 @@
-# Agentic Image Restoration: A Narrative Review
+# Agentic Image Restoration: A narrative review
 
-Companion resource for **Agentic image restoration links closed-loop controllers with protocol-aware evaluation: A Narrative Review**.
+Companion resource for **Agentic image restoration links closed-loop controllers with protocol-aware evaluation: A narrative review**.
 
 This repository organises restoration literature by runtime control, feedback, memory and coordination. It supplies a source-linked corpus and protocol audit, not a restoration implementation or a cross-paper performance leaderboard. The paper is under revision; no acceptance or publication DOI is claimed.
 
