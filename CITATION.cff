@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "Cite this companion resource and the original papers used. The manuscript is under revision."
+title: "Agentic image restoration links closed-loop controllers with protocol-aware evaluation: A Narrative Review"
+type: dataset
+authors:
+  - family-names: Yang
+    given-names: Yuezhe
+  - family-names: Li
+    given-names: Chengru
+  - family-names: Chai
+    given-names: Zhuodong
+  - family-names: Dong
+    given-names: Xingbo
+  - family-names: Jin
+    given-names: Zhe
+repository-code: "https://github.com/ahuteam/awesome-agentic-image-restoration"
+url: "https://github.com/ahuteam/awesome-agentic-image-restoration"
+keywords:
+  - image restoration
+  - narrative review
+  - agentic control
+  - protocol audit
