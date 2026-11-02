@@ -161,7 +161,7 @@ These tables accompany **Agentic Image Restoration: A Structured Review** and fo
 | Distort-and-Recover | MIT-Adobe 5K expert-C / distort-and-recover scheme | Mean L² error / SSIM | 12.15 / 0.910 | [Paper](https://openaccess.thecvf.com/content_cvpr_2018/html/Park_Distort-and-Recover_Color_Enhancement_CVPR_2018_paper.html) | Not released |
 | PaAgent | CSD | PSNR / SSIM | 37.95 dB / 0.98 | [Paper](https://arxiv.org/abs/2603.17055) | [Code, release announced](https://github.com/WYJGR/PaAgent) |
 | PaAgent | BSD68, σ = 15 | PSNR / SSIM | 34.39 dB / 0.94 | [Paper](https://arxiv.org/abs/2603.17055) | [Code, release announced](https://github.com/WYJGR/PaAgent) |
-| PaAgent | BSD68, σ = 25 | PSNR / SSIM | 29.36 dB / 0.85 | [Paper](https://arxiv.org/abs/2603.17055) | [Code, release announced](https://github.com/WYJGR/PaAgent) |
+| PaAgent | BSD68, σ = 25 | PSNR / SSIM | 31.40 dB / 0.89 | [Paper](https://arxiv.org/abs/2603.17055) | [Code, release announced](https://github.com/WYJGR/PaAgent) |
 | PaAgent | BSD68, σ = 50 | PSNR / SSIM | 27.03 dB / 0.79 | [Paper](https://arxiv.org/abs/2603.17055) | [Code, release announced](https://github.com/WYJGR/PaAgent) |
 | AirNet | Five-condition average: BSD68 (σ = 15, 25, 50), SOTS, Rain100L | PSNR / SSIM | 31.20 dB / 0.910 | [Paper](https://openaccess.thecvf.com/content/CVPR2022/html/Li_All-in-One_Image_Restoration_for_Unknown_Corruption_CVPR_2022_paper.html) | [Code](https://github.com/XLearning-SCU/2022-CVPR-AirNet) |
 | PromptIR | Five-condition average: BSD68 (σ = 15, 25, 50), SOTS, Rain100L | PSNR / SSIM | 32.06 dB / 0.913 | [Paper](https://proceedings.neurips.cc/paper_files/paper/2023/hash/e187897ed7780a8c3f50a8fc8997e6b1-Abstract-Conference.html) | [Code](https://github.com/va1shn9v/PromptIR) |
