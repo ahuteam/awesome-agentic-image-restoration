@@ -1,0 +1,14 @@
+{
+  "original_technical_studies": 49,
+  "original_library_entries": 89,
+  "revision_additions": 3,
+  "revised_technical_studies": 52,
+  "revised_library_entries": 92,
+  "background_context_entries": 40,
+  "new_study_ids": [
+    "AIR50",
+    "AIR51",
+    "AIR52"
+  ],
+  "selection": "Purposive primary-method-verified additions for hierarchical coordination, RL-trained language-model control, reusable experience; not exhaustive inclusion."
+}

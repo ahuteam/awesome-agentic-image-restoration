@@ -8,8 +8,8 @@ This repository organises restoration literature by runtime control, feedback, m
 
 | Resource | Purpose |
 |---|---|
-| [Study inventory](data/included_studies.csv) | 49 unique technical records, citation keys, titles, sources, roles and overlapping descriptors |
-| [Reference library](data/reference_library.csv) | 89 source-library entries; technical records separated from background/context |
+| [Study inventory](data/included_studies.csv) | 52 unique technical records (original 49 plus three revision additions), citation keys, titles, sources, roles and overlapping descriptors |
+| [Reference library](data/reference_library.csv) | 92 source-library entries (original 89 plus three additions); technical records separated from background/context |
 | [Applied audit](data/applied_audit.csv) | 11 representative systems: control evidence, output/process evidence and unresolved comparison fields |
 | [Protocol audit](data/protocol_audit.csv) | Interpretation and missingness for source-defined quantitative blocks |
 | [Evidence tables](EVIDENCE_TABLES.md) | Detailed historical, source-linked tables, read with the current coding rules |
@@ -43,9 +43,9 @@ Two worked examples in the revision illustrate these limits: Hybrid Agents trade
 
 ## Scope and provenance
 
-The original narrative covers literature dated 1 January 2018–9 August 2026. The 89 and 49 counts describe retained source material, not database hits or an exhaustive screening flow. Historical full-domain screening denominators are not recovered. A medical-subdomain ledger cannot substitute for them. Separately dated searches and their raw responses are retained in the revision workspace; they are not represented as a completed new screening exercise.
+The original narrative covers literature dated 1 January 2018–9 August 2026. Three primary-method-verified additions—STAR-RL, TIR-Agent and EvoIR-Agent—extend the technical inventory to 52 and the supporting library to 92. They were selected to examine hierarchical coordination, RL-trained language-model tool control and reusable experience; this purposive selection does not claim that every eligible search result is discussed. The 89 and 49 counts describe retained source material, not database hits or an exhaustive screening flow. Historical full-domain screening denominators are not recovered. A medical-subdomain ledger cannot substitute for them. Separately dated search parameters and metadata-only decision ledgers are linked below; raw responses are retained in the revision workspace; the bounded method-focused dispositions are documented in [Search provenance](docs/SEARCH_PROVENANCE.md), with unavailable or ambiguous records explicitly retained as unresolved.
 
-The 11-system audit is purposive and documentary, not a full 49-study quality assessment, an independent benchmark rerun or a validated risk-of-bias score. Primary-paper claims remain attributed to their original authors. Preprint status and the cited source version should be checked before reuse.
+The 11-system audit is purposive and documentary, not a full 52-study quality assessment, an independent benchmark rerun or a validated risk-of-bias score. Primary-paper claims remain attributed to their original authors. Preprint status and the cited source version should be checked before reuse.
 
 ## Validate the data
 
@@ -55,7 +55,7 @@ Only Python's standard library is required:
 python3 scripts/validate_evidence.py
 ```
 
-The check verifies unique study IDs/citation keys, 49/89 corpus accounting, source identifiers, permitted evidence roles and that audit references resolve to known studies. It does not validate every scientific claim or external website. CI runs the same check for proposed changes.
+The check verifies unique study IDs/citation keys, 52/92 corpus accounting, source identifiers, permitted evidence roles and that audit references resolve to known studies. It does not validate every scientific claim or external website. CI runs the same check for proposed changes.
 
 ## Citation and reuse
 

@@ -1,0 +1,9 @@
+{
+  "runtime_control_supported": 44,
+  "adjacent_or_unestablished_feedback": 8,
+  "full_text_not_established": 9,
+  "contextual_extension_or_resource": 6,
+  "deployment_feedback_not_resolved": 2,
+  "related_version_not_reconciled": 1,
+  "same_study_version": 1
+}
