@@ -43,6 +43,6 @@ A method-focused, AI-assisted verification pass over the 71 advanced records fou
 
 ## Files and interpretation
 
-`data/revision_search_screening.csv` supplies metadata and the recorded decisions/reasons. Full abstracts and article text are not redistributed here. `data/method_assessment.csv` supplies the 71 method-focused dispositions with primary identifiers and evidence basis. `data/included_studies.csv` is the 52-study purposive synthesis inventory, not all records considered eligible in discovery. Some literature-supported runtime-control records are outside this review's selected representative examples.
+`data/revision_search_screening.csv` contains 655 raw-record rows, including the five duplicate rows and their targets, followed by metadata and recorded decisions/reasons. There are 650 retained records after deduplication. Full abstracts and article text are not redistributed here. `data/method_assessment.csv` supplies the 71 method-focused dispositions with primary identifiers and evidence basis. `data/included_studies.csv` is the 52-study purposive synthesis inventory, not all records considered eligible in discovery. Some literature-supported runtime-control records are outside this review's selected representative examples.
 
 One AI-assisted assessment is not independent dual-human screening. Source-version, reporting and applicability judgments remain limited by the available texts. The public records support inspection of what was done; they do not establish complete recall of AIR literature.

@@ -1,5 +1,7 @@
 """Check corpus identity and linkage; does not certify scientific conclusions."""
 import csv
+import json
+from collections import Counter
 from pathlib import Path
 from urllib.parse import urlparse
 ROOT=Path(__file__).resolve().parents[1]
@@ -19,4 +21,16 @@ for x in studies:
     assert urlparse(x['source_url']).scheme=='https', 'Missing primary source identifier'
 for name in ['applied_audit.csv','protocol_audit.csv']:
     for x in read(name):assert x['citation_key'] in keys, 'Unresolved audit reference'
-print('PASS: 52 unique studies, 92 library records, source identifiers and audit links')
+screen=read('revision_search_screening.csv');method=read('method_assessment.csv')
+assert len(screen)==655 and len({x['record_id'] for x in screen})==655, 'Raw discovery identity mismatch'
+assert Counter(x['title_decision'] for x in screen)=={'duplicate':5,'exclude_at_title':550,'advance':100}, 'Raw/deduplicated/title counts differ'
+all_ids={x['record_id'] for x in screen}
+assert all(x['duplicate_of'] in all_ids for x in screen if x['title_decision']=='duplicate'), 'Duplicate target does not resolve'
+advanced=[x for x in screen if x['title_decision']=='advance']
+assert len(advanced)==100, 'Title-stage denominator mismatch'
+assert Counter(x['abstract_decision'] for x in advanced)=={'exclude':23,'adjacent_context':6,'advance_to_full_text':71}, 'Abstract-stage counts differ'
+assert {x['record_id'] for x in method}=={x['record_id'] for x in advanced if x['abstract_decision']=='advance_to_full_text'}, 'Method assessment does not cover the advanced records'
+expected=json.loads((ROOT/'data/method_assessment_counts.json').read_text())
+assert Counter(x['assessment'] for x in method)==expected, 'Method disposition counts differ'
+assert all(x['basis'] and x['primary_identifier'] for x in method), 'Method disposition lacks a source or reason'
+print('PASS: 52 studies, 92 library entries, linked audits and 655 raw records / 650 deduplicated records in the revision ledger')
